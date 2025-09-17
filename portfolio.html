@@ -40,9 +40,11 @@
     </div>
   </section>
 
-  <!-- Portfolio -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+<!-- Portfolio Section with Dynamic Background -->
+<section id="portfolio-section" class="py-16 bg-cover bg-center transition-all duration-700" 
+         style="background-image: url('assets/images/bg-all.jpg');">
+  <div class="max-w-7xl mx-auto px-4 bg-white/80 rounded-lg p-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
 
       <!-- Sample Destination -->
       <div class="portfolio-item europe bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
@@ -94,7 +96,48 @@
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.portfolio-item');
+  const portfolioSection = document.getElementById('portfolio-section');
+
+  // Backgrounds for each filter
+  const backgrounds = {
+    all: "assets/images/Dewars.jpg",
+    europe: "assets/images/bg-europe.jpg",
+    asia: "assets/images/bg-asia.jpg",
+    africa: "assets/images/bg-africa.jpg",
+    america: "assets/images/bg-america.jpg"
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Active button styling
+      buttons.forEach(b => b.classList.remove('bg-indigo-100', 'text-indigo-700'));
+      btn.classList.add('bg-indigo-100', 'text-indigo-700');
+
+      // Filter portfolio items
+      items.forEach(item => {
+        if (filter === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.toggle('hidden', !item.classList.contains(filter));
+        }
+      });
+
+      // Change background
+      if (backgrounds[filter]) {
+        portfolioSection.style.backgroundImage = `url('${backgrounds[filter]}')`;
+      }
+    });
+  });
+</script>
+
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-white text-center py-6">
