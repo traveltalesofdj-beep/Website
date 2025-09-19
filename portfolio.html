@@ -6,165 +6,239 @@
   <title>Portfolio | Travel Tales of Dillon & Jovita</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    #portfolio-section {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    /* Scroll animations */
+    .fade-scroll {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-scroll.up { transform: translateY(20px); opacity: 0; }
+    .fade-scroll.down { transform: translateY(-20px); opacity: 0; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="font-sans bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-600">
-        <a href="index.html">Travel Tales of Dillon & Jovita</a>
-      </h1>
-      <nav class="space-x-6 hidden md:flex">
-        <a href="index.html" class="text-gray-700 hover:text-indigo-600">Home</a>
-        <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
-        <a href="about.html" class="text-gray-700 hover:text-indigo-600">About</a>
-      </nav>
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-xl font-bold text-black-600">
+  Travel Tales of Dillon & Jovita
+</a>
+        </div>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="index.html#portfolio" class="nav-link">Our Journeys</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="index.html#about" class="nav-link">About Us</a>
+          <a href="index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-indigo-600 focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
     </div>
-  </header>
+    <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4">
+      <a href="index.html#portfolio" class="block py-2 text-gray-600 border-b border-gray-200">Our Journeys</a>
+      <a href="blog.html" class="block py-2 text-gray-600 border-b border-gray-200">Blog</a>
+      <a href="index.html#about" class="block py-2 text-gray-600 border-b border-gray-200">About Us</a>
+      <a href="index.html#contact" class="block py-2 text-gray-600">Contact</a>
+    </div>
+  </nav>
 
   <!-- Hero -->
-  <section class="bg-indigo-600 text-white py-16 text-center">
-    <h2 class="text-4xl font-bold mb-4">Our Travel Portfolio</h2>
-    <p class="text-lg">Explore our journeys across continents and cultures</p>
+  <section class="bg-indigo-600 text-white py-20 text-center">
+    <div class="max-w-4xl mx-auto px-4 fade-scroll up">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Our Travel Portfolio</h1>
+      <p class="text-lg md:text-xl text-indigo-100">A visual journey through continents, cultures, and adventures.</p>
+    </div>
   </section>
 
   <!-- Filters -->
-  <section class="bg-white py-8">
+  <section class="bg-white py-10 fade-scroll up">
     <div class="max-w-6xl mx-auto px-4 flex flex-wrap gap-4 justify-center">
-      <button class="filter-btn px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full" data-filter="all">All</button>
-      <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="europe">Europe</button>
-      <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="asia">Asia</button>
-      <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="africa">Africa</button>
-      <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="america">America</button>
+      <button class="filter-btn px-5 py-2 bg-indigo-100 text-indigo-700 rounded-full font-medium" data-filter="all">All</button>
+      <button class="filter-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="europe">Europe</button>
+      <button class="filter-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="asia">Asia</button>
+      <button class="filter-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="africa">Africa</button>
+      <button class="filter-btn px-5 py-2 bg-gray-100 text-gray-700 rounded-full" data-filter="america">America</button>
     </div>
   </section>
 
-<!-- Portfolio Section with Dynamic Background -->
-<section id="portfolio-section" class="py-16 bg-cover bg-center transition-all duration-700" 
-         style="background-image: url('assets/images/bg-all.jpg');">
-  <div class="max-w-7xl mx-auto px-4 bg-white/80 rounded-lg p-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+  <!-- Portfolio Section with Dynamic Background -->
+  <section id="portfolio-section" class="py-20 bg-cover bg-center transition-all duration-700" 
+           style="background-image: url('assets/images/bg-all.jpg');">
+    <div class="max-w-7xl mx-auto px-4 bg-white/80 rounded-xl p-8 shadow-lg">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
 
-      <!-- Sample Destination -->
-      <div class="portfolio-item europe bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/seven-sisters.jpg" alt="Seven Sisters" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Seven Sisters Hike</h3>
-          <p class="text-gray-600">United Kingdom • Spring 2024</p>
+        <!-- Sample Destination -->
+        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+          <img src="assets/images/seven-sisters.jpg" alt="Seven Sisters" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Seven Sisters Hike</h3>
+            <p class="text-gray-600">United Kingdom • Spring 2024</p>
+          </div>
         </div>
-      </div>
 
-      <div class="portfolio-item asia bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/vietnam.jpg" alt="Vietnam" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Ha Long Bay Kayaking</h3>
-          <p class="text-gray-600">Vietnam • December 2023</p>
+        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+          <img src="assets/images/vietnam.jpg" alt="Vietnam" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Ha Long Bay Kayaking</h3>
+            <p class="text-gray-600">Vietnam • December 2023</p>
+          </div>
         </div>
-      </div>
 
-      <div class="portfolio-item asia bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/india.jpg" alt="India" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Golden Triangle Tour</h3>
-          <p class="text-gray-600">India • January 2022</p>
+        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+          <img src="assets/images/india.jpg" alt="India" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Golden Triangle Tour</h3>
+            <p class="text-gray-600">India • January 2022</p>
+          </div>
         </div>
-      </div>
 
-      <div class="portfolio-item europe bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/paris.jpg" alt="Paris" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Romance in Paris</h3>
-          <p class="text-gray-600">France • July 2022</p>
+        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+          <img src="assets/images/paris.jpg" alt="Paris" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Romance in Paris</h3>
+            <p class="text-gray-600">France • July 2022</p>
+          </div>
         </div>
-      </div>
 
-      <div class="portfolio-item america bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/peru.jpg" alt="Peru" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Machu Picchu Adventure</h3>
-          <p class="text-gray-600">Peru • April 2023</p>
+        <!-- Coming Soon (hidden in All, only shows in America) -->
+        <div class="portfolio-item america coming-soon col-span-1 sm:col-span-2 lg:col-span-3 flex items-center justify-center py-16 hidden">
+          <p class="text-2xl font-semibold text-gray-500 italic">Coming Soon...</p>
         </div>
-      </div>
 
-      <div class="portfolio-item africa bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-        <img src="assets/images/morocco.jpg" alt="Morocco" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold">Sahara Desert Nights</h3>
-          <p class="text-gray-600">Morocco • November 2021</p>
+        <div class="portfolio-item africa bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+          <img src="assets/images/morocco.jpg" alt="Morocco" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Sahara Desert Nights</h3>
+            <p class="text-gray-600">Morocco • November 2021</p>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<script>
-  const buttons = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.portfolio-item');
-  const portfolioSection = document.getElementById('portfolio-section');
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <div class="flex items-center mb-4">
+            <img src="https://via.placeholder.com/40/6366f1/ffffff?text=TT" alt="Travel Tales Logo" class="h-10 w-10">
+            <span class="ml-2 text-xl font-bold text-indigo-400">Travel Tales</span>
+          </div>
+          <p class="text-gray-400 mb-4">Documenting our travels, sharing our stories, and inspiring others to explore the world.</p>
+          <div class="flex space-x-4">
+            <a href="https://instagram.com/traveltalesofdj" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@JovitaDcosta" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Explore</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="index.html#portfolio" class="text-gray-400 hover:text-white">Our Journeys</a></li>
+            <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+            <li><a href="index.html#about" class="text-gray-400 hover:text-white">About Us</a></li>
+            <li><a href="index.html#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Legal</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 Travel Tales of Dillon & Jovita. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-  // Backgrounds for each filter
-  const backgrounds = {
-    all: "assets/images/Dewars.jpg",
-    europe: "assets/images/bg-europe.jpg",
-    asia: "assets/images/bg-asia.jpg",
-    africa: "assets/images/bg-africa.jpg",
-    america: "assets/images/bg-america.jpg"
-  };
+  <!-- Back to Top -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg transition opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
+    const portfolioSection = document.getElementById('portfolio-section');
 
-      // Active button styling
+    const backgrounds = {
+      all: "assets/images/Dewars.jpg",
+      europe: "assets/images/bg-europe.jpg",
+      asia: "assets/images/bg-asia.jpg",
+      africa: "assets/images/bg-africa.jpg",
+      america: "assets/images/bg-america.jpg"
+    };
+
+    function applyFilter(filter) {
       buttons.forEach(b => b.classList.remove('bg-indigo-100', 'text-indigo-700'));
-      btn.classList.add('bg-indigo-100', 'text-indigo-700');
+      document.querySelector(`[data-filter="${filter}"]`).classList.add('bg-indigo-100', 'text-indigo-700');
 
-      // Filter portfolio items
       items.forEach(item => {
         if (filter === 'all') {
-          item.classList.remove('hidden');
+          if (!item.classList.contains("coming-soon")) item.classList.remove('hidden');
         } else {
           item.classList.toggle('hidden', !item.classList.contains(filter));
         }
       });
 
-      // Change background
       if (backgrounds[filter]) {
         portfolioSection.style.backgroundImage = `url('${backgrounds[filter]}')`;
       }
-    });
-  });
-</script>
+    }
 
+    buttons.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white text-center py-6">
-    <p>&copy; 2025 Travel Tales of Dillon & Jovita. All rights reserved.</p>
-  </footer>
+    window.addEventListener('DOMContentLoaded', () => applyFilter('all'));
 
-  <script>
-    const buttons = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.portfolio-item');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-
-        buttons.forEach(b => b.classList.remove('bg-indigo-100', 'text-indigo-700'));
-        btn.classList.add('bg-indigo-100', 'text-indigo-700');
-
-        items.forEach(item => {
-          if (filter === 'all') {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.toggle('hidden', !item.classList.contains(filter));
-          }
-        });
+    // Scroll animations
+    const fadeElements = document.querySelectorAll('.fade-scroll');
+    function checkElements() {
+      const triggerBottom = window.innerHeight * 0.8;
+      fadeElements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          el.style.opacity = "1";
+          el.style.transform = "translate(0,0)";
+        }
       });
-    });
-  </script>
+    }
+    window.addEventListener('scroll', checkElements);
+    checkElements();
 
+    // Mobile menu
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Back to top
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
 </body>
 </html>
