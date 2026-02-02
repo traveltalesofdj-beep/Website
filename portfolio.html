@@ -18,6 +18,13 @@
     }
     .fade-scroll.up { transform: translateY(20px); opacity: 0; }
     .fade-scroll.down { transform: translateY(-20px); opacity: 0; }
+
+    /* Scroll container for portfolio grid */
+    #portfolio-grid {
+      max-height: 1000px; /* limit visible height */
+      overflow-y: auto;   /* add scroll if more items */
+      padding-right: 8px;
+    }
   </style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800">
@@ -28,8 +35,8 @@
       <div class="flex justify-between items-center py-4">
         <div class="flex items-center space-x-4">
           <a href="index.html" class="text-xl font-bold text-black-600">
-  Travel Tales of Dillon & Jovita
-</a>
+            Travel Tales of Dillon & Jovita
+          </a>
         </div>
         <div class="hidden md:flex items-center space-x-6">
           <a href="index.html#portfolio" class="nav-link">Our Journeys</a>
@@ -77,8 +84,8 @@
     <div class="max-w-7xl mx-auto px-4 bg-white/80 rounded-xl p-8 shadow-lg">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
 
-        <!-- Sample Destination -->
-        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
+        <!-- REAL DESTINATIONS -->
+        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2024" data-title="Seven Sisters Hike">
           <img src="assets/images/seven-sisters.jpg" alt="Seven Sisters" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2">Seven Sisters Hike</h3>
@@ -86,43 +93,67 @@
           </div>
         </div>
 
-        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
-          <img src="assets/images/vietnam.jpg" alt="Vietnam" class="w-full h-56 object-cover">
+        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2023" data-title="Ha Long Bay Kayaking">
+          <img src="assets/images/seven-sisters.jpg" alt="Vietnam" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2">Ha Long Bay Kayaking</h3>
             <p class="text-gray-600">Vietnam • December 2023</p>
           </div>
         </div>
 
-        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
-          <img src="assets/images/india.jpg" alt="India" class="w-full h-56 object-cover">
+        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2022" data-title="Golden Triangle Tour">
+          <img src="assets/images/seven-sisters.jpg" alt="India" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2">Golden Triangle Tour</h3>
             <p class="text-gray-600">India • January 2022</p>
           </div>
         </div>
 
-        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
-          <img src="assets/images/paris.jpg" alt="Paris" class="w-full h-56 object-cover">
+        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2022" data-title="Romance in Paris">
+          <img src="assets/images/seven-sisters.jpg" alt="Paris" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2">Romance in Paris</h3>
             <p class="text-gray-600">France • July 2022</p>
           </div>
         </div>
 
-        <!-- Coming Soon (hidden in All, only shows in America) -->
-        <div class="portfolio-item america coming-soon col-span-1 sm:col-span-2 lg:col-span-3 flex items-center justify-center py-16 hidden">
-          <p class="text-2xl font-semibold text-gray-500 italic">Coming Soon...</p>
-        </div>
-
-        <div class="portfolio-item africa bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition">
-          <img src="assets/images/morocco.jpg" alt="Morocco" class="w-full h-56 object-cover">
+        <div class="portfolio-item africa bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2021" data-title="Sahara Desert Nights">
+          <img src="assets/images/seven-sisters.jpg" alt="Morocco" class="w-full h-56 object-cover">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2">Sahara Desert Nights</h3>
             <p class="text-gray-600">Morocco • November 2021</p>
           </div>
         </div>
 
+        <!-- COMING SOON (Only for America tab) -->
+        <div class="portfolio-item america coming-soon col-span-1 sm:col-span-2 lg:col-span-3 flex items-center justify-center py-16 hidden" data-year="2025" data-title="Coming Soon">
+          <p class="text-2xl font-semibold text-gray-500 italic">Coming Soon...</p>
+        </div>
+
+        <!-- DUMMY ITEMS FOR TESTING -->
+        <div class="portfolio-item europe bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2023" data-title="Berlin Lights">
+          <img src="assets/images/seven-sisters.jpg" alt="Berlin" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Berlin Lights</h3>
+            <p class="text-gray-600">Germany • 2023</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item asia bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2024" data-title="Tokyo Nights">
+          <img src="assets/images/seven-sisters.jpg" alt="Tokyo" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Tokyo Nights</h3>
+            <p class="text-gray-600">Japan • 2024</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item africa bg-white rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition" data-year="2022" data-title="Cape Town Escape">
+          <img src="assets/images/seven-sisters.jpg" alt="Cape Town" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Cape Town Escape</h3>
+            <p class="text-gray-600">South Africa • 2022</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -134,7 +165,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center mb-4">
             <img src="https://via.placeholder.com/40/6366f1/ffffff?text=TT" alt="Travel Tales Logo" class="h-10 w-10">
-            <span class="ml-2 text-xl font-bold text-indigo-400">Travel Tales</span>
+            <span class="ml-2 text-xl font-bold text-indigo-400">Travel Tales of DJ</span>
           </div>
           <p class="text-gray-400 mb-4">Documenting our travels, sharing our stories, and inspiring others to explore the world.</p>
           <div class="flex space-x-4">
@@ -180,23 +211,44 @@
 
     const backgrounds = {
       all: "assets/images/Dewars.jpg",
-      europe: "assets/images/bg-europe.jpg",
-      asia: "assets/images/bg-asia.jpg",
-      africa: "assets/images/bg-africa.jpg",
-      america: "assets/images/bg-america.jpg"
+      europe: "assets/images/Dewars.jpg",
+      asia: "assets/images/Dewars.jpg",
+      africa: "assets/images/Dewars.jpg",
+      america: "assets/images/Dewars.jpg"
     };
 
     function applyFilter(filter) {
       buttons.forEach(b => b.classList.remove('bg-indigo-100', 'text-indigo-700'));
       document.querySelector(`[data-filter="${filter}"]`).classList.add('bg-indigo-100', 'text-indigo-700');
 
+      let visibleItems = [];
       items.forEach(item => {
         if (filter === 'all') {
-          if (!item.classList.contains("coming-soon")) item.classList.remove('hidden');
+          // ✅ Always hide coming-soon in All
+          if (item.classList.contains("coming-soon")) {
+            item.classList.add('hidden');
+          } else {
+            item.classList.remove('hidden');
+            visibleItems.push(item);
+          }
         } else {
           item.classList.toggle('hidden', !item.classList.contains(filter));
+          if (item.classList.contains(filter)) visibleItems.push(item);
         }
       });
+
+      // ✅ Sorting logic only for "all"
+      if (filter === 'all') {
+        visibleItems.sort((a, b) => {
+          let yearA = parseInt(a.dataset.year) || 0;
+          let yearB = parseInt(b.dataset.year) || 0;
+          if (yearA !== yearB) return yearB - yearA; // newer first
+          return a.dataset.title.localeCompare(b.dataset.title);
+        });
+
+        const grid = document.getElementById('portfolio-grid');
+        visibleItems.forEach(item => grid.appendChild(item));
+      }
 
       if (backgrounds[filter]) {
         portfolioSection.style.backgroundImage = `url('${backgrounds[filter]}')`;
