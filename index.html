@@ -46,7 +46,23 @@
 
         }
 
-        
+        .valentine-btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4d7d, #ff1f68);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.valentine-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 30px rgba(0,0,0,.22);
+}
+
 
         .blog-card:hover .blog-image {
 
@@ -371,6 +387,11 @@
 								</div>
 
 							</section>
+							<div class="text-center my-12">
+  <a href="valentine.html" class="valentine-btn">💘 Valentine’s Day</a>
+</div>
+
+
 
 							<!-- Stats Section -->
 
@@ -625,41 +646,65 @@
 															</a>
 
 														</div>
-											<div class="text-center mt-6">
-
-  <a href="upcoming.html?trip=spain"
-     class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300">
+											<div class="text-center mt-16 mb-12">
+  <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
     Upcoming Trips
-    <i class="fas fa-calendar-alt ml-2"></i>
-  </a>
-
+  </h2>
+  <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+    A look at the journeys we’re planning next
+  </p>
 </div>
-											<div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
 
   <!-- Greece -->
   <a href="upcoming.html?trip=greece"
-     class="block bg-white rounded-xl shadow-md p-6 text-center hover:shadow-xl transition duration-300">
-    <h3 class="text-xl font-bold text-gray-800 mb-2">🇬🇷 Greece</h3>
-    <p class="text-gray-600">March</p>
+     class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
+    
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image: url('https://flagcdn.com/w640/gr.png');">
+    </div>
+
+    <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
+
+    <div class="relative p-8 text-center">
+      <h3 class="text-xl font-bold text-gray-800 mb-1">Greece</h3>
+      <p class="text-gray-600">March</p>
+    </div>
   </a>
 
   <!-- Spain -->
   <a href="upcoming.html?trip=spain"
-     class="block bg-white rounded-xl shadow-md p-6 text-center hover:shadow-xl transition duration-300">
-    <h3 class="text-xl font-bold text-gray-800 mb-2">🇪🇸 Spain</h3>
-    <p class="text-gray-600">August</p>
+     class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
+    
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image: url('https://flagcdn.com/w640/es.png');">
+    </div>
+
+    <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
+
+    <div class="relative p-8 text-center">
+      <h3 class="text-xl font-bold text-gray-800 mb-1">Spain</h3>
+      <p class="text-gray-600">August</p>
+    </div>
   </a>
 
   <!-- Toronto -->
   <a href="upcoming.html?trip=toronto"
-     class="block bg-white rounded-xl shadow-md p-6 text-center hover:shadow-xl transition duration-300">
-    <h3 class="text-xl font-bold text-gray-800 mb-2">🇨🇦 Toronto</h3>
-    <p class="text-gray-600">December</p>
+     class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
+    
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image: url('https://flagcdn.com/w640/ca.png');">
+    </div>
+
+    <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
+
+    <div class="relative p-8 text-center">
+      <h3 class="text-xl font-bold text-gray-800 mb-1">Toronto</h3>
+      <p class="text-gray-600">December</p>
+    </div>
   </a>
 
 </div>
-
-
 
 													</div>
 
@@ -1292,6 +1337,7 @@ if (contactForm) {
             });
 
         });
+		
 
     
 
