@@ -2,46 +2,72 @@ function renderSpainTrip(data) {
   const root = document.getElementById("spain-root");
 
   root.innerHTML = `
-    
-    <!-- Overview Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      ${data.overview.map(item => `
-        <div class="bg-white rounded-2xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">${item.title}</h3>
-          <p class="text-gray-600">${item.value}</p>
+
+    <!-- Overview -->
+    <div class="grid md:grid-cols-3 gap-6">
+      ${data.overview.map(o => `
+        <div class="bg-white p-5 rounded-xl shadow">
+          <h3 class="font-semibold">${o.title}</h3>
+          <p class="text-gray-600">${o.value}</p>
         </div>
       `).join("")}
     </div>
 
-    <!-- Itinerary -->
+    <!-- Flights -->
     <section>
-      <h2 class="text-2xl font-bold mb-6">🗺️ Rough Itinerary</h2>
+      <h2 class="text-xl font-bold mb-4">✈️ Flights</h2>
+      ${data.flights.map(f => `
+        <div class="bg-white p-5 rounded-xl shadow mb-4">
+          <p class="font-semibold">${f.route}</p>
+          <p class="text-gray-500">${f.time}</p>
+        </div>
+      `).join("")}
+    </section>
 
-      <div class="space-y-6">
-        ${data.itinerary.map(day => `
-          <div class="bg-white rounded-xl shadow p-6">
-            <h3 class="font-semibold text-lg mb-2">${day.title}</h3>
-            <ul class="list-disc list-inside text-gray-600 space-y-1">
-              ${day.items.map(i => `<li>${i}</li>`).join("")}
-            </ul>
+    <!-- Hotels -->
+    <section>
+      <h2 class="text-xl font-bold mb-4">🏨 Stays</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        ${data.hotels.map(h => `
+          <div class="bg-white rounded-xl shadow overflow-hidden">
+            <img src="${h.image}" class="w-full h-40 object-cover"/>
+            <div class="p-4">
+              <h3 class="font-semibold">${h.name}</h3>
+              <p class="text-gray-500 text-sm">${h.nights}</p>
+            </div>
           </div>
         `).join("")}
       </div>
     </section>
 
-    <!-- Practical Info -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">ℹ️ Good to Know</h2>
+<!-- Timeline Itinerary -->
+<section>
+  <h2 class="text-xl font-bold mb-6">🗺️ Journey Timeline</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        ${data.info.map(i => `
-          <div class="bg-white rounded-xl shadow p-6">
-            <h3 class="font-semibold mb-2">${i.title}</h3>
-            <p class="text-gray-600">${i.value}</p>
-          </div>
-        `).join("")}
+  <div class="relative border-l-2 border-gray-300 ml-4">
+
+    ${data.itinerary.map(i => `
+      <div class="mb-8 ml-6">
+
+        <!-- Dot -->
+        <span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-indigo-600 rounded-full text-white text-xs">
+          •
+        </span>
+
+        <!-- Card -->
+        <div class="bg-white p-5 rounded-xl shadow">
+          <h3 class="font-semibold text-lg mb-2">${i.title}</h3>
+
+          <ul class="list-disc ml-5 text-gray-600">
+            ${i.items.map(it => `<li>${it}</li>`).join("")}
+          </ul>
+        </div>
+
       </div>
-    </section>
+    `).join("")}
+
+  </div>
+</section>
 
   `;
 }

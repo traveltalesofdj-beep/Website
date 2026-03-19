@@ -4,126 +4,114 @@
   <meta charset="UTF-8">
   <title>Upcoming Trips | Travel Tales of Dillon & Jovita</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen">
 
 <!-- NAV -->
 <nav class="bg-white shadow-lg sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="index.html" class="text-xl font-bold text-black-600">
+    <a href="index.html" class="text-xl font-bold">
       Travel Tales of Dillon & Jovita
     </a>
-    <a href="index.html#portfolio" class="text-indigo-600 hover:text-indigo-800 font-medium">
+    <a href="index.html#portfolio" class="text-indigo-600 font-medium">
       ← Back to Home
     </a>
   </div>
 </nav>
 
+<!-- BACKGROUND -->
+<div class="fixed inset-0 bg-cover bg-center z-0"
+     style="background-image: url('https://images.unsplash.com/photo-1563371351-e57c48a4c19b?auto=format&fit=crop&w=1600&q=80');">
+</div>
 
+<div id="bg-overlay"
+     class="fixed inset-0 bg-white/70 backdrop-blur-md transition-all duration-700 z-0">
+</div>
 
 <!-- MAIN -->
-<section class="max-w-4xl mx-auto px-4 py-20">
+<section class="relative z-10 max-w-4xl mx-auto px-4 py-20">
 
-<div id="spain-lock" class="min-h-[70vh] flex items-center justify-center">
+  <!-- LOGIN -->
+  <div id="spain-lock" class="min-h-[70vh] flex items-center justify-center">
+    <form onsubmit="handleSpainLogin(event)"
+          class="bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-2xl w-full max-w-md text-center space-y-6">
 
-  <!-- BACKGROUND -->
-  <div class="absolute inset-0 bg-cover bg-center"
-       style="background-image: url('https://images.unsplash.com/photo-1509840841025-9088ba78a826');">
+      <h2 class="text-2xl font-bold">🇪🇸 Spain Trip</h2>
+
+      <input id="spain-password"
+        type="password"
+        placeholder="Enter password"
+        class="w-full px-4 py-3 border rounded-lg" />
+
+      <button type="submit"
+        class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold">
+        Unlock Trip
+      </button>
+
+      <p id="spain-error" class="text-red-500 hidden text-sm">
+        Wrong password — try again 👀
+      </p>
+    </form>
   </div>
 
-  <div class="absolute inset-0 bg-black/40"></div>
-
-  <!-- LOGIN CARD -->
-  <form onsubmit="handleSpainLogin(event)"
-        class="relative bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-2xl w-full max-w-md text-center space-y-6">
-
-    <h2 class="text-2xl font-bold">🇪🇸 Spain Trip</h2>
-    <p class="text-gray-600 text-sm">
-      This trip is private — access for close friends only ✨
-    </p>
-
-    <input id="spain-password"
-      type="password"
-      placeholder="Enter password"
-      class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
-
-    <button type="submit"
-      class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold transition">
-      Unlock Trip
-    </button>
-
-    <p id="spain-error" class="text-red-500 hidden text-sm">
-      Wrong password — try again 👀
-    </p>
-
-  </form>
-</div>
-
-<div id="spain-content" class="hidden space-y-16">
-  <div id="spain-root"></div>
-</div>
-
-
-  <!-- GREECE -->
-  <div id="greece" class="trip hidden">
-    <h1 class="text-4xl font-bold mb-6">🇬🇷 Greece Trip</h1>
-    <div class="bg-white rounded-xl shadow p-8 space-y-4">
-      <p>🏝️ Islands: Santorini, Mykonos</p>
-      <p>✈️ Flights: London → Athens</p>
-      <p>📅 Dates: Summer</p>
-      <p>🍽️ Focus: beaches, sunsets, food</p>
-    </div>
-  </div>
-
-  <!-- TORONTO -->
-  <div id="toronto" class="trip hidden">
-    <h1 class="text-4xl font-bold mb-6">🇨🇦 Toronto Trip</h1>
-    <div class="bg-white rounded-xl shadow p-8 space-y-4">
-      <p>🏙️ City exploration</p>
-      <p>🍔 Food spots & cafes</p>
-      <p>🚗 Niagara Falls day trip</p>
-      <p>📅 Dates: TBD</p>
-    </div>
+  <!-- CONTENT -->
+  <div id="spain-content" class="hidden space-y-10">
+    <div id="spain-root"></div>
   </div>
 
 </section>
 
-<!-- SCRIPT -->
+<!-- SCRIPTS -->
 <script src="spain.js"></script>
 <script src="render.js"></script>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const trip = params.get("trip");
+const SPAIN_PASSWORD = "Spain2026";
 
-  if (trip) {
-    const section = document.getElementById(trip);
-    if (section) section.classList.remove("hidden");
-  }
+const params = new URLSearchParams(window.location.search);
+const trip = params.get("trip");
+
 if (trip === "spain") {
-  renderSpainTrip(spainTrip); // only render, DON'T show yet
+  renderSpainTrip(spainTrip);
 }
-  // PASSWORD (optional)
-  const SPAIN_PASSWORD = "Spain2026";
 
-function handleSpainLogin(event) {
-  event.preventDefault(); // 🚨 prevents page reload
+<form onsubmit="handleSpainLogin(event)"
+  class="relative overflow-hidden rounded-2xl shadow-2xl w-full max-w-md text-center">
 
-  const input = document.getElementById("spain-password").value;
-  const error = document.getElementById("spain-error");
 
-  if (input === SPAIN_PASSWORD) {
-    document.getElementById("spain-lock").classList.add("hidden");
-    document.getElementById("spain-content").classList.remove("hidden");
-    error.classList.add("hidden");
-  } else {
-    error.classList.remove("hidden");
-  }
-}
+  <div class="absolute inset-0 bg-cover bg-center"
+       style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80');">
+  </div>
+
+
+  <div class="absolute inset-0 bg-black/40"></div>
+
+ 
+  <div class="relative p-10 space-y-6 text-white">
+
+    <h2 class="text-2xl font-bold">🇪🇸 Spain Trip</h2>
+
+    <input id="spain-password"
+      type="password"
+      placeholder="Enter password"
+      class="w-full px-4 py-3 rounded-lg text-black" />
+
+    <button type="submit"
+      class="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+      Unlock Trip
+    </button>
+
+    <p id="spain-error" class="text-red-300 hidden text-sm">
+      Wrong password — try again 👀
+    </p>
+
+  </div>
+</form>
 </script>
+
 </body>
 </html>
