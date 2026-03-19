@@ -26,127 +26,8 @@
 <!-- MAIN -->
 <section class="max-w-4xl mx-auto px-4 py-20">
 
-  <!-- SPAIN (LOCKED) -->
-<div id="spain" class="trip hidden">
-
-  <!-- Title -->
-  <div class="mb-12">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">Spain Trip</h1>
-    <p class="text-lg text-gray-600 max-w-2xl">
-      A relaxed summer escape with food, beaches, culture, and slow travel.
-    </p>
-  </div>
-
-  <!-- Password Gate -->
-  <div id="spain-lock" class="bg-white p-8 rounded-2xl shadow-md max-w-md">
-    <p class="text-lg font-medium mb-4">
-      Friends-only access ✨
-    </p>
-
-    <input
-      type="password"
-      id="spain-password"
-      placeholder="Enter password"
-      class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 outline-none"
-    />
-
-    <button
-      onclick="unlockSpain()"
-      class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-300"
-    >
-      Enter Trip Details
-    </button>
-
-    <p id="spain-error" class="text-red-600 mt-4 hidden">
-      Incorrect password
-    </p>
-  </div>
-
-  <!-- CONTENT -->
-  <div id="spain-content" class="hidden space-y-16">
-
-    <!-- Overview Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">📍 Destinations</h3>
-        <p class="text-gray-600">Barcelona · Valencia · Day trips</p>
-      </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">🗓️ Month</h3>
-        <p class="text-gray-600">August</p>
-      </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">👥 Travel Style</h3>
-        <p class="text-gray-600">Relaxed · Food-first · Walkable</p>
-      </div>
-    </div>
-
-    <!-- Itinerary -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">🗺️ Rough Itinerary</h2>
-
-      <div class="space-y-6">
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 1–3 · Barcelona</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>Gothic Quarter walks</li>
-            <li>Sagrada Família</li>
-            <li>Tapas & sangria nights</li>
-            <li>Sunset at Barceloneta Beach</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 4 · Montserrat (Day Trip)</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>Mountain views</li>
-            <li>Monastery visit</li>
-            <li>Short scenic hikes</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 5–7 · Valencia</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>City of Arts & Sciences</li>
-            <li>Paella birthplace 🍚</li>
-            <li>Beach cycling</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Practical Info -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">ℹ️ Good to Know</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">✈️ Flights</h3>
-          <p class="text-gray-600">London → Barcelona</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">🚆 Transport</h3>
-          <p class="text-gray-600">High-speed Renfe trains between cities</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">🍽️ Food Focus</h3>
-          <p class="text-gray-600">Tapas, seafood, paella, bakeries</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">📝 Notes</h3>
-          <p class="text-gray-600">Late dinners · Hot afternoons · Siestas</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
+<div id="spain-content" class="hidden space-y-16">
+  <div id="spain-root"></div>
 </div>
 
 
@@ -175,18 +56,23 @@
 </section>
 
 <!-- SCRIPT -->
+ <script src="spain.js"></script>
+<script src="render.js"></script>
 <script>
-  // Show selected trip
   const params = new URLSearchParams(window.location.search);
   const trip = params.get("trip");
 
   if (trip) {
     const section = document.getElementById(trip);
     if (section) section.classList.remove("hidden");
+
+    if (trip === "spain") {
+      renderSpainTrip(spainTrip);
+    }
   }
 
-  // SPAIN PASSWORD (CHANGE THIS)
-  const SPAIN_PASSWORD = "friends2026";
+  // SPAIN PASSWORD
+  const SPAIN_PASSWORD = "Spain2026";
 
   function unlockSpain() {
     const input = document.getElementById("spain-password").value;
@@ -201,6 +87,5 @@
     }
   }
 </script>
-
 </body>
 </html>
