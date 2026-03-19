@@ -1,66 +1,34 @@
-const spainTrip = {
-  title: "Spain Trip",
-  subtitle: "A relaxed summer escape with food, beaches, culture, and slow travel.",
-
-  overview: [
-    {
-      title: "📍 Destinations",
-      value: "Barcelona · Valencia · Day trips"
-    },
-    {
-      title: "🗓️ Month",
-      value: "August"
-    },
-    {
-      title: "👥 Travel Style",
-      value: "Relaxed · Food-first · Walkable"
-    }
-  ],
-
-  itinerary: [
-    {
-      title: "Day 1–3 · Barcelona",
-      items: [
-        "Gothic Quarter walks",
-        "Sagrada Família",
-        "Tapas & sangria nights",
-        "Sunset at Barceloneta Beach"
-      ]
-    },
-    {
-      title: "Day 4 · Montserrat (Day Trip)",
-      items: [
-        "Mountain views",
-        "Monastery visit",
-        "Short scenic hikes"
-      ]
-    },
-    {
-      title: "Day 5–7 · Valencia",
-      items: [
-        "City of Arts & Sciences",
-        "Paella birthplace 🍚",
-        "Beach cycling"
-      ]
-    }
-  ],
-
-  info: [
-    {
-      title: "✈️ Flights",
-      value: "London → Barcelona"
-    },
-    {
-      title: "🚆 Transport",
-      value: "High-speed Renfe trains between cities"
-    },
-    {
-      title: "🍽️ Food Focus",
-      value: "Tapas, seafood, paella, bakeries"
-    },
-    {
-      title: "📝 Notes",
-      value: "Late dinners · Hot afternoons · Siestas"
-    }
-  ]
-};
+const spainTrip = [
+  {
+    day: "Day 1",
+    title: "Arrival in Barcelona",
+    icon: "✈️",
+    items: [
+      "Flight from London → Barcelona",
+      "Hotel check-in",
+      "Evening walk in Gothic Quarter",
+      "Tapas dinner 🍷"
+    ]
+  },
+  {
+    day: "Day 2",
+    title: "Barcelona Exploration",
+    icon: "🏙️",
+    items: [
+      "Sagrada Familia visit",
+      "Park Güell",
+      "La Rambla walk",
+      "Sunset at Bunkers del Carmel"
+    ]
+  },
+  {
+    day: "Day 3",
+    title: "Beach & Chill",
+    icon: "🏖️",
+    items: [
+      "Barceloneta Beach",
+      "Seafood lunch",
+      "Relax + explore local cafes"
+    ]
+  }
+];
