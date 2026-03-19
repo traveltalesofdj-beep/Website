@@ -3,71 +3,103 @@ function renderSpainTrip(data) {
 
   root.innerHTML = `
 
-    <!-- Overview -->
-    <div class="grid md:grid-cols-3 gap-6">
-      ${data.overview.map(o => `
-        <div class="bg-white p-5 rounded-xl shadow">
-          <h3 class="font-semibold">${o.title}</h3>
-          <p class="text-gray-600">${o.value}</p>
-        </div>
-      `).join("")}
-    </div>
+    <div class="space-y-16">
 
-    <!-- Flights -->
-    <section>
-      <h2 class="text-xl font-bold mb-4">✈️ Flights</h2>
-      ${data.flights.map(f => `
-        <div class="bg-white p-5 rounded-xl shadow mb-4">
-          <p class="font-semibold">${f.route}</p>
-          <p class="text-gray-500">${f.time}</p>
-        </div>
-      `).join("")}
-    </section>
+      <!-- HERO -->
+      <div class="scroll-reveal text-center">
+        <h1 class="text-4xl font-bold text-white mb-2">Spain Trip Plan</h1>
+        <p class="text-white/80">Barcelona → Valencia · Summer vibes ☀️</p>
+      </div>
 
-    <!-- Hotels -->
-    <section>
-      <h2 class="text-xl font-bold mb-4">🏨 Stays</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        ${data.hotels.map(h => `
-          <div class="bg-white rounded-xl shadow overflow-hidden">
-            <img src="${h.image}" class="w-full h-40 object-cover"/>
-            <div class="p-4">
-              <h3 class="font-semibold">${h.name}</h3>
-              <p class="text-gray-500 text-sm">${h.nights}</p>
-            </div>
+      <!-- Overview -->
+      <div class="scroll-reveal grid md:grid-cols-3 gap-6">
+        ${data.overview.map(o => `
+          <div class="bg-white/60 backdrop-blur-md p-5 rounded-xl shadow border border-white/30">
+            <h3 class="font-semibold">${o.title}</h3>
+            <p class="text-gray-700">${o.value}</p>
           </div>
         `).join("")}
       </div>
-    </section>
 
-<!-- Timeline Itinerary -->
-<section>
-  <h2 class="text-xl font-bold mb-6">🗺️ Journey Timeline</h2>
+      <!-- Flights -->
+      <section class="scroll-reveal">
+        <h2 class="text-2xl font-bold text-white mb-6">✈️ Flights</h2>
 
-  <div class="relative border-l-2 border-gray-300 ml-4">
+        ${data.flights.map(f => `
+          <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden border border-white/30 mb-4">
+            <img src="${f.image}" class="w-full h-40 object-cover"/>
+            <div class="p-5">
+              <p class="font-semibold text-lg">${f.route}</p>
+              <p class="text-gray-600 text-sm">${f.time}</p>
+            </div>
+          </div>
+        `).join("")}
+      </section>
 
-    ${data.itinerary.map(i => `
-      <div class="mb-8 ml-6">
+      <!-- Hotels -->
+      <section class="scroll-reveal">
+        <h2 class="text-2xl font-bold text-white mb-6">🏨 Stays</h2>
 
-        <!-- Dot -->
-        <span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-indigo-600 rounded-full text-white text-xs">
-          •
-        </span>
-
-        <!-- Card -->
-        <div class="bg-white p-5 rounded-xl shadow">
-          <h3 class="font-semibold text-lg mb-2">${i.title}</h3>
-
-          <ul class="list-disc ml-5 text-gray-600">
-            ${i.items.map(it => `<li>${it}</li>`).join("")}
-          </ul>
+        <div class="grid md:grid-cols-2 gap-6">
+          ${data.hotels.map(h => `
+            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow overflow-hidden border border-white/30">
+              <img src="${h.image}" class="w-full h-40 object-cover"/>
+              <div class="p-4">
+                <h3 class="font-semibold">${h.name}</h3>
+                <p class="text-gray-600 text-sm">${h.nights}</p>
+              </div>
+            </div>
+          `).join("")}
         </div>
+      </section>
 
-      </div>
-    `).join("")}
+      <!-- Timeline -->
+      <section class="scroll-reveal">
+        <h2 class="text-2xl font-bold text-white mb-6">🗺️ Your Journey</h2>
 
-  </div>
-</section>
+        <div class="space-y-8">
+          ${data.itinerary.map((i, index) => `
+            <div class="flex items-start gap-6">
 
+              <div class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-600 text-white font-bold shadow-lg">
+                ${index + 1}
+              </div>
+
+              <div class="flex-1 bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30">
+                <h3 class="font-semibold text-lg mb-2">${i.title}</h3>
+
+                <ul class="space-y-1 text-gray-700">
+                  ${i.items.map(it => `
+                    <li class="flex items-center gap-2">
+                      <span class="text-indigo-500">•</span>
+                      ${it}
+                    </li>
+                  `).join("")}
+                </ul>
+              </div>
+
+            </div>
+          `).join("")}
+        </div>
+      </section>
+
+    </div>
   `;
+
+  initScrollAnimations();
+}
+
+
+function initScrollAnimations() {
+  const elements = document.querySelectorAll('.scroll-reveal');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  elements.forEach(el => observer.observe(el));
 }
