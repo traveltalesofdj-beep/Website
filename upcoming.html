@@ -40,55 +40,78 @@
 </div>
 
 <!-- LOGIN -->
-<div id="spain-lock" class="fixed inset-0 flex items-center justify-center z-20">
-  <form onsubmit="handleSpainLogin(event)"
+<div id="trip-lock" class="fixed inset-0 flex items-center justify-center z-20">
+  <form onsubmit="handleLogin(event)"
     class="bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl px-10 py-12 w-full max-w-md text-center shadow-2xl space-y-6">
 
-    <h1 class="text-4xl text-white font-bold">SPAIN TRIP</h1>
+    <h1 id="trip-title" class="text-4xl text-white font-bold">Trip</h1>
 
-    <input id="spain-password" type="password" placeholder="Password"
+    <input id="trip-password" type="password" placeholder="Password"
       class="w-full px-5 py-3 rounded-full bg-white text-black"/>
 
     <button class="bg-blue-600 text-white py-3 w-full rounded-full">
       Unlock Trip
     </button>
 
-    <p id="spain-error" class="text-red-300 hidden">Wrong password</p>
+    <p id="trip-error" class="text-red-300 hidden">Wrong password</p>
   </form>
 </div>
 
 <!-- CONTENT -->
 <section class="relative z-10 max-w-4xl mx-auto px-4 py-20">
-  <div id="spain-content" class="hidden space-y-16">
-    <div id="spain-root"></div>
+  <div id="trip-content" class="hidden space-y-16">
+    <div id="trip-root"></div>
   </div>
 </section>
 
+<!-- SCRIPTS -->
 <script src="spain.js"></script>
+<script src="portugal.js"></script>
 <script src="render.js"></script>
 
 <script>
-const SPAIN_PASSWORD = "Spain2026";
+const TRIP_PASSWORDS = {
+  spain: "Spain2026",
+  portugal: "Portugal2026"
+};
 
-function handleSpainLogin(e){
+const params = new URLSearchParams(window.location.search);
+const trip = params.get("trip");
+
+// Dynamic title
+const titleMap = {
+  spain: "🇪🇸 Spain Trip",
+  portugal: "🇵🇹 Portugal Trip"
+};
+
+document.getElementById("trip-title").innerText =
+  titleMap[trip] || "Trip Access";
+
+function handleLogin(e){
   e.preventDefault();
 
-  const val = document.getElementById("spain-password").value;
-  const error = document.getElementById("spain-error");
-  const content = document.getElementById("spain-content");
+  const val = document.getElementById("trip-password").value;
+  const error = document.getElementById("trip-error");
+  const content = document.getElementById("trip-content");
 
-  if(val === SPAIN_PASSWORD){
+  if(val === TRIP_PASSWORDS[trip]){
 
     // hide login
-    document.getElementById("spain-lock").classList.add("hidden");
+    document.getElementById("trip-lock").classList.add("hidden");
 
     // show content
     content.classList.remove("hidden");
 
-    // render main UI
-    renderSpainTrip(spainTrip);
+    // render correct trip
+    if(trip === "spain"){
+      renderSpainTrip(spainTrip);
+    }
 
-    // 👇 ADD WELCOME MESSAGE
+    if(trip === "portugal"){
+      renderSpainTrip(portugalTrip);
+    }
+
+    // welcome message
     const welcome = document.createElement("div");
     welcome.className = "scroll-reveal";
 
@@ -98,17 +121,14 @@ function handleSpainLogin(e){
           👋 Welcome Dillon’s inner circle
         </h2>
         <p class="text-white/80">
-          Let’s make this Spain trip unforgettable 🇪🇸
+          Let’s make this trip unforgettable ✈️
         </p>
       </div>
     `;
 
     content.prepend(welcome);
 
-    // trigger animation again
-    setTimeout(() => {
-      welcome.classList.add("show");
-    }, 100);
+    setTimeout(() => welcome.classList.add("show"), 100);
 
     error.classList.add("hidden");
 

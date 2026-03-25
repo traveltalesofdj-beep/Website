@@ -1,5 +1,6 @@
 function renderSpainTrip(data) {
-  const root = document.getElementById("spain-root");
+  //const root = document.getElementById("spain-root");
+  const root = document.getElementById("trip-root");
 
   root.innerHTML = `
 
