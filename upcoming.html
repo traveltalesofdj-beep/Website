@@ -2,204 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Upcoming Trips | Travel Tales of Dillon & Jovita</title>
+  <title>Upcoming Trips</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(60px) scale(0.96);
+      transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .scroll-reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="text-gray-800 font-sans min-h-screen overflow-x-hidden">
 
 <!-- NAV -->
 <nav class="bg-white shadow-lg sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="index.html" class="text-xl font-bold text-black-600">
-      Travel Tales of Dillon & Jovita
-    </a>
-    <a href="index.html#portfolio" class="text-indigo-600 hover:text-indigo-800 font-medium">
-      ← Back to Home
-    </a>
+  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between">
+    <a href="index.html" class="font-bold text-xl">Travel Tales</a>
   </div>
 </nav>
 
-<!-- MAIN -->
-<section class="max-w-4xl mx-auto px-4 py-20">
-
-  <!-- SPAIN (LOCKED) -->
-<div id="spain" class="trip hidden">
-
-  <!-- Title -->
-  <div class="mb-12">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">Spain Trip</h1>
-    <p class="text-lg text-gray-600 max-w-2xl">
-      A relaxed summer escape with food, beaches, culture, and slow travel.
-    </p>
+<!-- BACKGROUND -->
+<div class="fixed inset-0 -z-10">
+  <div class="absolute inset-0 bg-cover bg-center"
+    style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80');">
   </div>
-
-  <!-- Password Gate -->
-  <div id="spain-lock" class="bg-white p-8 rounded-2xl shadow-md max-w-md">
-    <p class="text-lg font-medium mb-4">
-      Friends-only access ✨
-    </p>
-
-    <input
-      type="password"
-      id="spain-password"
-      placeholder="Enter password"
-      class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 outline-none"
-    />
-
-    <button
-      onclick="unlockSpain()"
-      class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition duration-300"
-    >
-      Enter Trip Details
-    </button>
-
-    <p id="spain-error" class="text-red-600 mt-4 hidden">
-      Incorrect password
-    </p>
-  </div>
-
-  <!-- CONTENT -->
-  <div id="spain-content" class="hidden space-y-16">
-
-    <!-- Overview Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">📍 Destinations</h3>
-        <p class="text-gray-600">Barcelona · Valencia · Day trips</p>
-      </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">🗓️ Month</h3>
-        <p class="text-gray-600">August</p>
-      </div>
-      <div class="bg-white rounded-2xl shadow p-6">
-        <h3 class="font-semibold text-lg mb-2">👥 Travel Style</h3>
-        <p class="text-gray-600">Relaxed · Food-first · Walkable</p>
-      </div>
-    </div>
-
-    <!-- Itinerary -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">🗺️ Rough Itinerary</h2>
-
-      <div class="space-y-6">
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 1–3 · Barcelona</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>Gothic Quarter walks</li>
-            <li>Sagrada Família</li>
-            <li>Tapas & sangria nights</li>
-            <li>Sunset at Barceloneta Beach</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 4 · Montserrat (Day Trip)</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>Mountain views</li>
-            <li>Monastery visit</li>
-            <li>Short scenic hikes</li>
-          </ul>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold text-lg mb-2">Day 5–7 · Valencia</h3>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>City of Arts & Sciences</li>
-            <li>Paella birthplace 🍚</li>
-            <li>Beach cycling</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Practical Info -->
-    <section>
-      <h2 class="text-2xl font-bold mb-6">ℹ️ Good to Know</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">✈️ Flights</h3>
-          <p class="text-gray-600">London → Barcelona</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">🚆 Transport</h3>
-          <p class="text-gray-600">High-speed Renfe trains between cities</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">🍽️ Food Focus</h3>
-          <p class="text-gray-600">Tapas, seafood, paella, bakeries</p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow p-6">
-          <h3 class="font-semibold mb-2">📝 Notes</h3>
-          <p class="text-gray-600">Late dinners · Hot afternoons · Siestas</p>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
+  <div class="absolute inset-0 bg-black/30"></div>
 </div>
 
+<!-- LOGIN -->
+<div id="trip-lock" class="fixed inset-0 flex items-center justify-center z-20">
+  <form onsubmit="handleLogin(event)"
+    class="bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl px-10 py-12 w-full max-w-md text-center shadow-2xl space-y-6">
 
-  <!-- GREECE -->
-  <div id="greece" class="trip hidden">
-    <h1 class="text-4xl font-bold mb-6">🇬🇷 Greece Trip</h1>
-    <div class="bg-white rounded-xl shadow p-8 space-y-4">
-      <p>🏝️ Islands: Santorini, Mykonos</p>
-      <p>✈️ Flights: London → Athens</p>
-      <p>📅 Dates: Summer</p>
-      <p>🍽️ Focus: beaches, sunsets, food</p>
-    </div>
+    <h1 id="trip-title" class="text-4xl text-white font-bold">Trip</h1>
+
+    <input id="trip-password" type="password" placeholder="Password"
+      class="w-full px-5 py-3 rounded-full bg-white text-black"/>
+
+    <button class="bg-blue-600 text-white py-3 w-full rounded-full">
+      Unlock Trip
+    </button>
+
+    <p id="trip-error" class="text-red-300 hidden">Wrong password</p>
+  </form>
+</div>
+
+<!-- CONTENT -->
+<section class="relative z-10 max-w-4xl mx-auto px-4 py-20">
+  <div id="trip-content" class="hidden space-y-16">
+    <div id="trip-root"></div>
   </div>
-
-  <!-- TORONTO -->
-  <div id="toronto" class="trip hidden">
-    <h1 class="text-4xl font-bold mb-6">🇨🇦 Toronto Trip</h1>
-    <div class="bg-white rounded-xl shadow p-8 space-y-4">
-      <p>🏙️ City exploration</p>
-      <p>🍔 Food spots & cafes</p>
-      <p>🚗 Niagara Falls day trip</p>
-      <p>📅 Dates: TBD</p>
-    </div>
-  </div>
-
 </section>
 
-<!-- SCRIPT -->
+<!-- SCRIPTS -->
+<script src="spain.js"></script>
+<script src="portugal.js"></script>
+<script src="render.js"></script>
+
 <script>
-  // Show selected trip
-  const params = new URLSearchParams(window.location.search);
-  const trip = params.get("trip");
+const TRIP_PASSWORDS = {
+  spain: "Spain2026",
+  portugal: "Portugal2026"
+};
 
-  if (trip) {
-    const section = document.getElementById(trip);
-    if (section) section.classList.remove("hidden");
-  }
+const params = new URLSearchParams(window.location.search);
+const trip = params.get("trip");
 
-  // SPAIN PASSWORD (CHANGE THIS)
-  const SPAIN_PASSWORD = "friends2026";
+// Dynamic title
+const titleMap = {
+  spain: "🇪🇸 Spain Trip",
+  portugal: "🇵🇹 Portugal Trip"
+};
 
-  function unlockSpain() {
-    const input = document.getElementById("spain-password").value;
-    const error = document.getElementById("spain-error");
+document.getElementById("trip-title").innerText =
+  titleMap[trip] || "Trip Access";
 
-    if (input === SPAIN_PASSWORD) {
-      document.getElementById("spain-lock").classList.add("hidden");
-      document.getElementById("spain-content").classList.remove("hidden");
-      error.classList.add("hidden");
-    } else {
-      error.classList.remove("hidden");
+function handleLogin(e){
+  e.preventDefault();
+
+  const val = document.getElementById("trip-password").value;
+  const error = document.getElementById("trip-error");
+  const content = document.getElementById("trip-content");
+
+  if(val === TRIP_PASSWORDS[trip]){
+
+    // hide login
+    document.getElementById("trip-lock").classList.add("hidden");
+
+    // show content
+    content.classList.remove("hidden");
+
+    // render correct trip
+    if(trip === "spain"){
+      renderSpainTrip(spainTrip);
     }
+
+    if(trip === "portugal"){
+      renderSpainTrip(portugalTrip);
+    }
+
+    // welcome message
+    const welcome = document.createElement("div");
+    welcome.className = "scroll-reveal";
+
+    welcome.innerHTML = `
+      <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 text-center">
+        <h2 class="text-2xl font-bold text-white mb-1">
+          👋 Welcome Dillon’s inner circle
+        </h2>
+        <p class="text-white/80">
+          Let’s make this trip unforgettable ✈️
+        </p>
+      </div>
+    `;
+
+    content.prepend(welcome);
+
+    setTimeout(() => welcome.classList.add("show"), 100);
+
+    error.classList.add("hidden");
+
+  } else {
+    error.classList.remove("hidden");
   }
+}
 </script>
 
 </body>
