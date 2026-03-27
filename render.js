@@ -48,10 +48,20 @@ function renderSpainTrip(data) {
         <div class="grid md:grid-cols-2 gap-6">
           ${data.hotels.map(h => `
             <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow overflow-hidden border border-white/30 hover:shadow-xl transition">
+              
               <img src="${h.image}" class="w-full h-40 object-cover"/>
+
               <div class="p-4">
-                <h3 class="font-semibold">${h.name}</h3>
+                <h3 class="font-semibold text-gray-800">${h.name}</h3>
                 <p class="text-gray-600 text-sm">${h.nights}</p>
+
+                ${h.link ? `
+                  <a href="${h.link}" target="_blank"
+                     class="inline-block mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                     View Stay →
+                  </a>
+                ` : ''}
+
               </div>
             </div>
           `).join("")}

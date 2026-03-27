@@ -25,7 +25,8 @@ const portugalTrip = {
     {
       name: "Casa Branca do Monte - Cozy Madeira Tradition, Entire home in Funchal, Portugal",
       image: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ4NDAwNTk0NTQ5MTAyMjI2MQ==/original/6ff4b91f-855b-40cb-873e-b76b9d6fc7f0.jpeg",
-      nights: "3 nights (30 June 15:00 - 3 Jul 11:00)"
+      nights: "3 nights (30 June 15:00 - 3 Jul 11:00)",
+      link: "https://www.airbnb.co.uk/rooms/1484005945491022261?check_in=2026-06-30&check_out=2026-07-03&guests=5&adults=5&s=67&unique_share_id=03c970e0-0abd-44e1-a178-a1960c7da7a4" 
     }
   ],
 
