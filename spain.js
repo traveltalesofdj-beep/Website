@@ -1,15 +1,19 @@
 const spainTrip = {
+  title: "Spain Trip Plan",
+subtitle: "Valencia → Barcelona · Summer vibes",
   overview: [
-    { title: "📍 Destinations", value: "Barcelona · Valencia" },
-    { title: "🗓️ Month", value: "August" },
-    { title: "🍽️ Style", value: "Food · Chill · Beaches" }
+    { title: "📍 Destinations", value: "Valencia · Barcelona" },
+    { title: "🗓️ Dates", value: "25 August - 31 August" },
+    { title: "🍽️ Style", value: "Food · Chill · La Tomatina" },
+    { title: "📄 Documents", value: "Tickets · Bookings · IDs", link: "https://your-link-here.com"}
   ],
 
   flights: [
     {
-      route: "London → Barcelona",
-      time: "08:20 – 11:20",
-      image: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f"
+      route: "London Stansted → Valencia",
+      time: "07:00 – 11:20",
+      //image: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f"
+      image: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=80"
     },
     {
       route: "Valencia → London",
@@ -20,12 +24,13 @@ const spainTrip = {
 
   hotels: [
     {
-      name: "Barcelona Stay",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-      nights: "3 nights"
+      name: "Apartment with terrace in Central Park || Valencia, Spain",
+     // image: "https://images.unsplash.com/photo-1634298259994-d04e0993571b?auto=format&fit=crop&w=1600&q=80",
+     image: "https://a0.muscache.com/im/pictures/prohost-api/Hosting-23139582/original/aa47b423-79eb-4a8e-8493-1b6408273865.jpeg",
+      nights: "25 to 28 August 2026, 3 Nights"
     },
     {
-      name: "Valencia Beach Hotel",
+      name: "Barcelona Stay",
       image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
       nights: "3 nights"
     }
@@ -33,14 +38,18 @@ const spainTrip = {
 
   itinerary: [
     {
-      title: "Day 1–3 · Barcelona",
+      title: "Day 1–3 · Valencia",
       items: ["Sagrada Familia", "Beach sunset", "Tapas nights"]
     },
     {
-      title: "Day 4 · Montserrat",
+      title: "Day 4 · Barcelona",
       items: ["Mountain views", "Monastery visit"]
     },
     {
+      title: "Day 5–7 · Valencia",
+      items: ["Paella", "Cycling", "City of Arts"]
+    },
+        {
       title: "Day 5–7 · Valencia",
       items: ["Paella", "Cycling", "City of Arts"]
     }

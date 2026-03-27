@@ -1,5 +1,4 @@
 function renderSpainTrip(data) {
-  //const root = document.getElementById("spain-root");
   const root = document.getElementById("trip-root");
 
   root.innerHTML = `
@@ -8,15 +7,20 @@ function renderSpainTrip(data) {
 
       <!-- HERO -->
       <div class="scroll-reveal text-center">
-        <h1 class="text-4xl font-bold text-white mb-2">Spain Trip Plan</h1>
-        <p class="text-white/80">Barcelona → Valencia · Summer vibes ☀️</p>
+        <h1 class="text-4xl font-bold text-white mb-2">${data.title}</h1>
+        <p class="text-white/80">${data.subtitle}</p>
       </div>
 
       <!-- Overview -->
       <div class="scroll-reveal grid md:grid-cols-3 gap-6">
         ${data.overview.map(o => `
-          <div class="bg-white/60 backdrop-blur-md p-5 rounded-xl shadow border border-white/30">
-            <h3 class="font-semibold">${o.title}</h3>
+          <div 
+            class="bg-white/60 backdrop-blur-md p-5 rounded-xl shadow border border-white/30 text-center
+            ${o.link ? 'cursor-pointer hover:scale-105 hover:shadow-xl transition duration-300' : ''}"
+            
+            ${o.link ? `onclick="window.open('${o.link}', '_blank')"` : ''}
+          >
+            <h3 class="font-semibold text-gray-800">${o.title}</h3>
             <p class="text-gray-700">${o.value}</p>
           </div>
         `).join("")}
@@ -27,7 +31,7 @@ function renderSpainTrip(data) {
         <h2 class="text-2xl font-bold text-white mb-6">✈️ Flights</h2>
 
         ${data.flights.map(f => `
-          <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden border border-white/30 mb-4">
+          <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden border border-white/30 mb-4 hover:shadow-xl transition">
             <img src="${f.image}" class="w-full h-40 object-cover"/>
             <div class="p-5">
               <p class="font-semibold text-lg">${f.route}</p>
@@ -43,7 +47,7 @@ function renderSpainTrip(data) {
 
         <div class="grid md:grid-cols-2 gap-6">
           ${data.hotels.map(h => `
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow overflow-hidden border border-white/30">
+            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow overflow-hidden border border-white/30 hover:shadow-xl transition">
               <img src="${h.image}" class="w-full h-40 object-cover"/>
               <div class="p-4">
                 <h3 class="font-semibold">${h.name}</h3>
@@ -66,7 +70,7 @@ function renderSpainTrip(data) {
                 ${index + 1}
               </div>
 
-              <div class="flex-1 bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30">
+              <div class="flex-1 bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 hover:shadow-xl transition">
                 <h3 class="font-semibold text-lg mb-2">${i.title}</h3>
 
                 <ul class="space-y-1 text-gray-700">

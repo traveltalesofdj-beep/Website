@@ -27,17 +27,13 @@
 <!-- NAV -->
 <nav class="bg-white shadow-lg sticky top-0 z-50">
   <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between">
-    <a href="index.html" class="font-bold text-xl">Travel Tales</a>
+    <a href="index.html" class="font-bold text-xl">Travel Tales of Dillon and Jovita</a>
   </div>
 </nav>
 
-<!-- BACKGROUND -->
-<div class="fixed inset-0 -z-10">
-  <div class="absolute inset-0 bg-cover bg-center"
-    style="background-image: url('https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80');">
-  </div>
-  <div class="absolute inset-0 bg-black/30"></div>
-</div>
+<!-- BACKGROUND (dynamic) -->
+<div id="bg-image" class="fixed inset-0 -z-10 bg-cover bg-center"></div>
+<div class="fixed inset-0 bg-black/30 -z-10"></div>
 
 <!-- LOGIN -->
 <div id="trip-lock" class="fixed inset-0 flex items-center justify-center z-20">
@@ -78,15 +74,28 @@ const TRIP_PASSWORDS = {
 const params = new URLSearchParams(window.location.search);
 const trip = params.get("trip");
 
-// Dynamic title
+// ✅ Dynamic title
 const titleMap = {
-  spain: "🇪🇸 Spain Trip",
-  portugal: "🇵🇹 Portugal Trip"
+  spain: "🇪🇸 SPAIN TRIP",
+  portugal: "🇵🇹 PORTUGAL TRIP"
 };
 
 document.getElementById("trip-title").innerText =
   titleMap[trip] || "Trip Access";
 
+// ✅ Dynamic background
+const backgroundMap = {
+//  spain: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1600&q=80",
+spain: "https://images.unsplash.com/photo-1725208179317-c5e56702816a?auto=format&fit=crop&w=1600&q=80",
+  portugal: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80"
+};
+
+if (backgroundMap[trip]) {
+  document.getElementById("bg-image").style.backgroundImage =
+    `url('${backgroundMap[trip]}')`;
+}
+/*
+// ✅ LOGIN
 function handleLogin(e){
   e.preventDefault();
 
@@ -111,14 +120,14 @@ function handleLogin(e){
       renderSpainTrip(portugalTrip);
     }
 
-    // welcome message
+    // welcome banner
     const welcome = document.createElement("div");
     welcome.className = "scroll-reveal";
 
     welcome.innerHTML = `
       <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 text-center">
         <h2 class="text-2xl font-bold text-white mb-1">
-          👋 Welcome Dillon’s inner circle
+           Welcome Dillon and Jovita's inner circle
         </h2>
         <p class="text-white/80">
           Let’s make this trip unforgettable ✈️
@@ -135,7 +144,69 @@ function handleLogin(e){
   } else {
     error.classList.remove("hidden");
   }
+}*/
+//Adding for Netlify
+async function handleLogin(e){
+  e.preventDefault();
+
+  const val = document.getElementById("trip-password").value;
+  const error = document.getElementById("trip-error");
+  const content = document.getElementById("trip-content");
+
+  try {
+    const res = await fetch("/.netlify/functions/checkPassword", {
+      method: "POST",
+      body: JSON.stringify({
+        trip: trip,
+        password: val
+      })
+    });
+
+    const data = await res.json();
+
+    if(data.success){
+
+      document.getElementById("trip-lock").classList.add("hidden");
+      content.classList.remove("hidden");
+
+      if(trip === "spain"){
+        renderSpainTrip(spainTrip);
+      }
+
+      if(trip === "portugal"){
+        renderSpainTrip(portugalTrip);
+      }
+    // welcome banner
+    const welcome = document.createElement("div");
+    welcome.className = "scroll-reveal";
+
+    welcome.innerHTML = `
+      <div class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 text-center">
+        <h2 class="text-2xl font-bold text-white mb-1">
+           Welcome Dillon and Jovita's inner circle
+        </h2>
+        <p class="text-white/80">
+          Let’s make this trip unforgettable ✈️
+        </p>
+      </div>
+    `;
+
+    content.prepend(welcome);
+
+    setTimeout(() => welcome.classList.add("show"), 100);
+
+      error.classList.add("hidden");
+
+    } else {
+      error.classList.remove("hidden");
+    }
+
+  } catch(err){
+    console.error(err);
+    error.classList.remove("hidden");
+  }
 }
+//Ends here
 </script>
 
 </body>

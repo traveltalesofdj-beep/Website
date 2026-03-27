@@ -1,60 +1,59 @@
 const portugalTrip = {
+  title: "Portugal Trip Plan",
+  subtitle: "Madeira · Coastal vibes 🌊",
   overview: [
-    { title: "📍 Destinations", value: "Lisbon · Porto" },
-    { title: "🗓️ Month", value: "March" },
-    { title: "🍽️ Style", value: "Coastal · Food · Scenic" }
+    { title: "📍 Destination", value: "Madeira" },
+    { title: "🗓️ Dates", value: "30 June - 03 July" },
+    { title: "🍽️ Style", value: "Coastal · Food · Scenic" },
+    { title: "📄 Documents", value: "Tickets · Bookings · IDs", link: "https://drive.google.com/drive/folders/19cuuvUU-Oha_AaZjjf2baV5XNa5XEori"}
   ],
 
   flights: [
     {
-      route: "London → Lisbon",
-      time: "09:10 – 11:50",
-      image: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1200&q=80"
+      route: "London Gatwick → Madeira Funchal, BA2718",
+      time: "30 June 2026 || 14:40 – 18:35",
+      image: "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?auto=format&fit=crop&w=1600&q=80",
     },
     {
-      route: "Porto → London",
-      time: "18:00 – 20:30",
+      route: "Madeira Funchal → London Gatwick, BA2717",
+      time: "3 July 2026 || 13:10 – 16:55",
       image: "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=1200&q=80"
     }
   ],
 
   hotels: [
     {
-      name: "Lisbon City Stay",
-      image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-      nights: "3 nights"
-    },
-    {
-      name: "Porto Riverside Hotel",
-      image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
-      nights: "3 nights"
+      name: "Casa Branca do Monte - Cozy Madeira Tradition, Entire home in Funchal, Portugal",
+      image: "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ4NDAwNTk0NTQ5MTAyMjI2MQ==/original/6ff4b91f-855b-40cb-873e-b76b9d6fc7f0.jpeg",
+      nights: "3 nights (30 June 15:00 - 3 Jul 11:00)"
     }
   ],
 
   itinerary: [
     {
-      title: "Day 1–3 · Lisbon",
+      title: "Day 1 · 30 June",
       items: [
-        "Tram 28 ride",
-        "Alfama district walk",
-        "Pastel de nata tasting",
-        "Sunset at Miradouro"
+        "Landing",
+        "AirBnb"
       ]
     },
     {
-      title: "Day 4 · Sintra",
+      title: "Day 2 · 01 July",
       items: [
-        "Pena Palace",
-        "Castle of the Moors",
-        "Scenic train ride"
+
       ]
     },
     {
-      title: "Day 5–7 · Porto",
+      title: "Day 3 · 02 July",
       items: [
-        "Douro river walk",
-        "Wine tasting 🍷",
-        "Ribeira district"
+
+      ]
+    },
+        {
+      title: "Day 4 · 03 July",
+      items: [
+        "Airport",
+        "Return"
       ]
     }
   ]
