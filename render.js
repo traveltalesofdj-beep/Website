@@ -79,7 +79,7 @@ function renderSpainTrip(data) {
             <p class="text-2xl font-bold text-gray-800">Enter your T-shirt details</p>
             <p class="text-gray-700 max-w-2xl mx-auto">
              Add your name and T-shirt size now 👕
-Random pairings will be revealed soon!
+Random pairings will be revealed soon!!
 
 Here’s the twist 😄
 Whoever you get, you must gift them a funny and embarrassing T-shirt… and they are REQUIRED to wear it for the entire trip until we reach the destination 🚐😂
