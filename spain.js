@@ -31,9 +31,10 @@ subtitle: "Valencia → Madrid · Summer vibes",
       link: "https://www.airbnb.co.uk/rooms/23139582?guests=1&adults=1&s=67&unique_share_id=64496f7f-3ad7-43b7-ab68-1ab06491ebf5" 
     },
     {
-      name: "Madrid Stay (Details Coming Soon)",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-      nights: "28 to 31 August 2026, 3 Nights"
+      name: "Large Rustic Luxury Apartment, La Latina DA34 || Madrid, Spain",
+      image: "https://a0.muscache.com/im/pictures/55c444df-67b7-4766-b767-850f7fcfb70b.jpg?im_w=1200",
+      nights: "28 to 31 August 2026, 3 Nights",
+      link: "https://www.airbnb.co.in/rooms/19547515?source_impression_id=p3_1781034443_P3u79JsKv8Dz0BjG" 
     }
   ],
 

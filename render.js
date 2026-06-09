@@ -68,67 +68,45 @@ function renderSpainTrip(data) {
         </div>
       </section>
 
-      <!-- 🎯 Airport T-Shirt Details Form (ONLY FOR SPAIN) -->
+      <!-- 🎯 Airport Pairing Generator (ONLY FOR SPAIN) -->
       ${isSpain ? `
       <section class="scroll-reveal">
         <h2 class="text-2xl font-bold text-white mb-6">🎯 Airport Pairing Game</h2>
 
-        <div id="airport-tshirt-card" class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 space-y-6">
+        <div id="airport-pairing-card" class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 space-y-6">
 
           <div class="text-center space-y-3">
-            <p class="text-2xl font-bold text-gray-800">Enter your T-shirt details</p>
+            <p class="text-2xl font-bold text-gray-800">Generate your T-shirt person</p>
             <p class="text-gray-700 max-w-2xl mx-auto">
-             Add your name and T-shirt size now 👕
-Random pairings will be revealed soon!!
-
-Here’s the twist 😄
-Whoever you get, you must gift them a funny and embarrassing T-shirt… and they are REQUIRED to wear it for the entire trip until we reach the destination 🚐😂
-            </p>
-            <p class="text-sm text-red-700 font-bold bg-red-50/80 border border-red-200 rounded-lg px-4 py-3 inline-block">
-              Last date to submit: 31st May 2026, 11:59 PM BST
+              Select your name and let the generator reveal who you are gifting a T-shirt to.
             </p>
           </div>
 
-          <form id="airport-tshirt-form" name="airport-tshirt-details" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4 text-left">
-            <input type="hidden" name="form-name" value="airport-tshirt-details" />
-            <input type="hidden" name="subject" data-remove-prefix value="New Airport T-Shirt Detail Submission" />
-            <input type="hidden" name="trip" value="${data.title}" />
-
-            <p class="hidden">
-              <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-            </p>
-
+          <form id="airport-pairing-form" class="space-y-4 text-left">
             <div>
-              <label for="airportTshirtName" class="block text-sm font-semibold text-gray-800 mb-2">Name: <span class="text-red-600">*</span></label>
-              <input id="airportTshirtName" name="name" type="text" required placeholder="Enter your name"
-                class="w-full px-4 py-3 rounded-lg border border-white/40 bg-white/80 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-            </div>
-
-            <div>
-              <label for="airportTshirtSize" class="block text-sm font-semibold text-gray-800 mb-2">T-shirt Size: <span class="text-red-600">*</span></label>
-              <select id="airportTshirtSize" name="tshirtSize" required
+              <label for="airportGiverName" class="block text-sm font-semibold text-gray-800 mb-2">Your name:</label>
+              <select id="airportGiverName" name="giver" required
                 class="w-full px-4 py-3 rounded-lg border border-white/40 bg-white/80 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="">Select your size</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-                <option value="XXXL">XXXL</option>
-                <option value="Other">Other</option>
+                <option value="">Select your name</option>
               </select>
             </div>
 
-            <button type="submit" id="airportTshirtSubmit"
+            <button type="submit" id="airportPairingButton"
               class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
-              Submit T-shirt details 👕
+              Generate my person 🎲
             </button>
 
-            <p id="airportTshirtError" class="hidden text-sm text-red-700 font-semibold text-center bg-red-50/80 border border-red-200 rounded-lg px-4 py-3">
-              Something went wrong. Please try submitting again.
+            <div id="airportShuffleBox" class="hidden text-center bg-white/70 border border-white/40 rounded-xl px-4 py-5" aria-live="polite">
+              <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Shuffling names...</p>
+              <p id="airportShuffleName" class="text-3xl font-bold text-indigo-700 mt-2">?</p>
+            </div>
+
+            <p id="airportPairingError" class="hidden text-sm text-red-700 font-semibold text-center bg-red-50/80 border border-red-200 rounded-lg px-4 py-3">
+              Something went wrong while generating your person. Please try again.
             </p>
           </form>
+
+          <div id="airportPairingResult" class="hidden" aria-live="polite"></div>
 
         </div>
       </section>
@@ -170,80 +148,140 @@ Whoever you get, you must gift them a funny and embarrassing T-shirt… and they
   initScrollAnimations();
 
   if (isSpain) {
-    initAirportTshirtForm();
+    initAirportPairingGenerator();
   }
 }
 
 
 
 
-// ================= AIRPORT T-SHIRT FORM =================
+// ================= AIRPORT PAIRING GENERATOR =================
 
-function encodeFormData(data) {
-  return new URLSearchParams(data).toString();
-}
+const AIRPORT_PARTICIPANTS = [
+  "Cenvy",
+  "Conchita",
+  "Dillon",
+  "Jovita",
+  "Leander",
+  "Lionel",
+  "Sonal",
+  "Zachery"
+];
 
-function initAirportTshirtForm() {
-  const form = document.getElementById("airport-tshirt-form");
-  const card = document.getElementById("airport-tshirt-card");
+function initAirportPairingGenerator() {
+  const form = document.getElementById("airport-pairing-form");
+  const select = document.getElementById("airportGiverName");
+  const button = document.getElementById("airportPairingButton");
+  const shuffleBox = document.getElementById("airportShuffleBox");
+  const shuffleName = document.getElementById("airportShuffleName");
+  const errorMessage = document.getElementById("airportPairingError");
+  const result = document.getElementById("airportPairingResult");
 
-  if (!form || !card) return;
+  if (!form || !select || !button || !shuffleBox || !shuffleName || !errorMessage || !result) return;
+
+  AIRPORT_PARTICIPANTS.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    select.appendChild(option);
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!form.reportValidity()) return;
 
-    const submitButton = document.getElementById("airportTshirtSubmit");
-    const errorMessage = document.getElementById("airportTshirtError");
+    const giver = select.value;
+    const displayNames = AIRPORT_PARTICIPANTS.filter((name) => name !== giver);
+    let shuffleIndex = 0;
 
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = "Submitting...";
-      submitButton.classList.add("opacity-70", "cursor-not-allowed");
-    }
+    button.disabled = true;
+    button.textContent = "Generating...";
+    button.classList.add("opacity-70", "cursor-not-allowed");
+    errorMessage.classList.add("hidden");
+    result.classList.add("hidden");
+    result.innerHTML = "";
+    shuffleBox.classList.remove("hidden");
+    shuffleName.textContent = "?";
 
-    if (errorMessage) {
-      errorMessage.classList.add("hidden");
-    }
+    const shuffleTimer = window.setInterval(() => {
+      const randomOffset = Math.floor(Math.random() * displayNames.length);
+      shuffleIndex = (shuffleIndex + 1 + randomOffset) % displayNames.length;
+      shuffleName.textContent = displayNames[shuffleIndex];
+    }, 90);
 
     try {
-      const response = await fetch("/", {
+      const assignmentRequest = fetch("/.netlify/functions/airportAssignment", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeFormData(new FormData(form))
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ giver })
       });
 
+      await new Promise((resolve) => window.setTimeout(resolve, 1500));
+
+      const response = await assignmentRequest;
+
       if (!response.ok) {
-        throw new Error(`Netlify form submission failed with status ${response.status}`);
+        throw new Error(`Assignment request failed with status ${response.status}`);
       }
 
-      card.innerHTML = `
-        <div class="text-center space-y-4 py-8" aria-live="polite">
-          <div class="text-5xl">👕</div>
-          <h3 class="text-2xl font-bold text-gray-800">Thank you for the response!</h3>
-          <p class="text-gray-700 max-w-2xl mx-auto">
-            Please watch this space for your assignment in a few days.
-          </p>
-          <p class="text-sm text-gray-600 max-w-2xl mx-auto">
-            Pairing will be added soon.
-          </p>
-        </div>
-      `;
+      const data = await response.json();
+
+      if (!data.success || !data.receiver) {
+        throw new Error("Assignment response was missing receiver details");
+      }
+
+      window.clearInterval(shuffleTimer);
+      shuffleName.textContent = data.receiver.name;
+
+      window.setTimeout(() => {
+        shuffleBox.classList.add("hidden");
+        renderAirportPairingResult(result, data);
+        button.disabled = false;
+        button.textContent = "Reveal again 🎲";
+        button.classList.remove("opacity-70", "cursor-not-allowed");
+      }, 450);
     } catch (error) {
-      console.error("Airport T-shirt form submission failed:", error);
-
-      if (errorMessage) {
-        errorMessage.classList.remove("hidden");
-      }
-
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = "Submit T-shirt details 👕";
-        submitButton.classList.remove("opacity-70", "cursor-not-allowed");
-      }
+      console.error("Airport pairing generation failed:", error);
+      window.clearInterval(shuffleTimer);
+      shuffleBox.classList.add("hidden");
+      errorMessage.classList.remove("hidden");
+      button.disabled = false;
+      button.textContent = "Generate my person 🎲";
+      button.classList.remove("opacity-70", "cursor-not-allowed");
     }
   });
+}
+
+function renderAirportPairingResult(result, data) {
+  const sizeText = data.receiver.tshirtSize || "Size not added yet";
+
+  result.innerHTML = `
+    <div class="bg-white/75 border border-white/50 rounded-2xl p-6 text-center shadow-inner space-y-5">
+      <div class="text-5xl">👕</div>
+      <div>
+        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">${data.giver.name}, you are giving a funny T-shirt to</p>
+        <h3 class="text-4xl font-extrabold text-indigo-700 mt-2">${data.receiver.name}</h3>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+        <div class="bg-white/80 rounded-xl px-4 py-4 border border-white/60">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Receiver Name</p>
+          <p class="text-xl font-bold text-gray-800">${data.receiver.name}</p>
+        </div>
+        <div class="bg-white/80 rounded-xl px-4 py-4 border border-white/60">
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">T-Shirt Size</p>
+          <p class="text-xl font-bold text-gray-800">${sizeText}</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-700 max-w-2xl mx-auto">
+        Assignment rule: everyone gives once, receives once, and nobody gives to themselves.
+      </p>
+    </div>
+  `;
+
+  result.classList.remove("hidden");
 }
 
 // ================= SCROLL =================

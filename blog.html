@@ -1,112 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog Posts</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        .blog-card {
-            transition: all 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .image-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: rgba(156, 163, 175, 0.5);
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(156, 163, 175, 0.8);
-        }
-
-        /* 🚧 FULL PAGE WIP OVERLAY */
-        .page-wip {
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .page-wip span {
-            background: linear-gradient(135deg, #000, #333);
-            color: white;
-            padding: 16px 28px;
-            border-radius: 999px;
-            font-weight: bold;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=view-all-blog-posts.html">
+  <title>Redirecting to Blog Posts | Travel Tales of Dillon & Jovita</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body class="bg-gray-50 min-h-screen">
-
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <a href="about.html" class="text-2xl font-bold text-black-600">
-                    Travel Tales of Dillon & Jovita
-                </a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-indigo-600 font-medium">Blog</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">About</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">Contact</a>
-                </nav>
-                <button class="md:hidden text-gray-700">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="bg-indigo-600 text-white py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">All Blog Posts</h1>
-            <p class="text-xl md:text-2xl max-w-2xl mx-auto">
-                Explore our collection of insightful articles and stories.
-            </p>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="container mx-auto px-4 py-12">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-800">Latest Articles</h2>
-        </div>
-
-        <div id="blogPostsContainer"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2023 Travel Tales of Dillon & Jovita</p>
-        </div>
-    </footer>
-
-    <!-- 🚧 OVERLAY -->
-    <div class="page-wip">
-        <span>🚧 Coming Soon — Stories Brewing ✈️</span>
-    </div>
-
+<body class="min-h-screen bg-gray-50 flex items-center justify-center text-center px-4">
+  <main class="bg-white rounded-2xl shadow-lg p-8 max-w-md">
+    <h1 class="text-2xl font-bold text-gray-800 mb-3">Redirecting to View All Blog Posts</h1>
+    <p class="text-gray-600 mb-6">The blog page has moved to the new all-posts page.</p>
+    <a href="view-all-blog-posts.html" class="inline-flex items-center px-5 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition">
+      Open View All Blog Posts
+    </a>
+  </main>
 </body>
 </html>
