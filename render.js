@@ -275,9 +275,6 @@ function renderAirportPairingResult(result, data) {
         </div>
       </div>
 
-      <p class="text-sm text-gray-700 max-w-2xl mx-auto">
-        Assignment rule: everyone gives once, receives once, and nobody gives to themselves.
-      </p>
     </div>
   `;
 
