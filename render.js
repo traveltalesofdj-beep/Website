@@ -1,298 +1,206 @@
-function renderSpainTrip(data) {
+function renderTrip(data) {
   const root = document.getElementById("trip-root");
+  if (!root || !data || typeof data !== "object") return;
 
-  const isSpain = data.title.toLowerCase().includes("spain");
+  const overview = Array.isArray(data.overview) ? data.overview : [];
+  const flights = Array.isArray(data.flights) ? data.flights : [];
+  const hotels = Array.isArray(data.hotels) ? data.hotels : [];
+  const weatherStops = Array.isArray(data.weatherStops) ? data.weatherStops : [];
+  const tshirtResults = Array.isArray(data.tshirtResults) ? data.tshirtResults : [];
+  const itinerary = Array.isArray(data.itinerary) ? data.itinerary : [];
+  const routeCodes = Array.isArray(data.routeCodes) ? data.routeCodes : [];
 
   root.innerHTML = `
+    <div class="trip-layout">
+      <header class="trip-hero scroll-reveal">
+        <p class="trip-kicker">${data.eyebrow || "A new adventure"}</p>
+        <h1>${data.title || "Upcoming trip"}</h1>
+        <p>${data.subtitle || "More details are coming soon."}</p>
+        ${routeCodes.length === 2 ? `<div class="hero-route" aria-label="Route from ${routeCodes[0]} to ${routeCodes[1]}"><span>${routeCodes[0]}</span><i class="fas fa-arrow-right"></i><span>${routeCodes[1]}</span></div>` : ""}
+      </header>
 
-    <div class="space-y-16">
-
-      <!-- HERO -->
-      <div class="scroll-reveal text-center">
-        <h1 class="text-4xl font-bold text-white mb-2">${data.title}</h1>
-        <p class="text-white/80">${data.subtitle}</p>
-      </div>
-
-      <!-- Overview -->
-      <div class="scroll-reveal grid md:grid-cols-3 gap-6">
-        ${data.overview.map(o => `
-          <div 
-            class="bg-white/60 backdrop-blur-md p-5 rounded-xl shadow border border-white/30 text-center
-            ${o.link ? 'cursor-pointer hover:scale-105 hover:shadow-xl transition duration-300' : ''}"
-            ${o.link ? `onclick="window.open('${o.link}', '_blank')"` : ''}
-          >
-            <h3 class="font-semibold text-gray-800">${o.title}</h3>
-            <p class="text-gray-700">${o.value}</p>
-          </div>
-        `).join("")}
-      </div>
-
-      <!-- Flights -->
-      <section class="scroll-reveal">
-        <h2 class="text-2xl font-bold text-white mb-6">✈️ Flights</h2>
-
-        ${data.flights.map(f => `
-          <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden border border-white/30 mb-4 hover:shadow-xl transition">
-            <img src="${f.image}" class="w-full h-40 object-cover"/>
-            <div class="p-5">
-              <p class="font-semibold text-lg">${f.route}</p>
-              <p class="text-gray-600 text-sm">${f.time}</p>
-            </div>
-          </div>
-        `).join("")}
-      </section>
-
-      <!-- Hotels -->
-      <section class="scroll-reveal">
-        <h2 class="text-2xl font-bold text-white mb-6">🏨 Stays</h2>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          ${data.hotels.map(h => `
-            <div class="bg-white/60 backdrop-blur-md rounded-2xl shadow overflow-hidden border border-white/30 hover:shadow-xl transition">
-              
-              <img src="${h.image}" class="w-full h-40 object-cover"/>
-
-              <div class="p-4">
-                <h3 class="font-semibold text-gray-800">${h.name}</h3>
-                <p class="text-gray-600 text-sm">${h.nights}</p>
-
-                ${h.link ? `
-                  <a href="${h.link}" target="_blank"
-                     class="inline-block mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
-                     View Stay →
-                  </a>
-                ` : ''}
-              </div>
-            </div>
+      ${overview.length ? `
+        <section class="overview-grid scroll-reveal" aria-label="Trip overview">
+          ${overview.map(item => `
+            <article class="glass-card overview-card">
+              <i class="fas ${item.icon || "fa-compass"}"></i>
+              <div><span>${item.title}</span><strong>${item.value}</strong></div>
+            </article>
           `).join("")}
+        </section>
+      ` : ""}
+
+      ${data.documentsLink ? `
+        <div class="documents-cta scroll-reveal">
+          <div class="documents-cta-icon"><i class="fas fa-folder-open"></i></div>
+          <div><span class="card-label">Shared trip folder</span><h2>Tickets, bookings and IDs</h2><p>Open the group’s shared Google Drive folder for the latest travel documents.</p></div>
+          <a href="${data.documentsLink}" target="_blank" rel="noopener" class="trip-button">Open documents <i class="fas fa-arrow-up-right-from-square"></i></a>
         </div>
-      </section>
+      ` : ""}
 
-      <!-- 🎯 Airport Pairing Generator (ONLY FOR SPAIN) -->
-      ${isSpain ? `
-      <section class="scroll-reveal">
-        <h2 class="text-2xl font-bold text-white mb-6">🎯 Airport Pairing Game</h2>
-
-        <div id="airport-pairing-card" class="bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 space-y-6">
-
-          <div class="text-center space-y-3">
-            <p class="text-2xl font-bold text-gray-800">Generate your T-shirt person</p>
-            <p class="text-gray-700 max-w-2xl mx-auto">
-              Select your name and let the generator reveal who you are gifting a T-shirt to.
-            </p>
+      ${flights.length || data.train ? `
+        <section class="trip-section scroll-reveal">
+          ${sectionHeading("Getting there", "Flights, trains and the useful details in between", "fa-route")}
+          <div class="flight-grid with-train">
+            ${flights.map(flight => `
+              <article class="glass-card transport-card">
+                <img src="${flight.image}" alt="Aircraft in flight" loading="lazy">
+                <div class="card-body">
+                  <span class="card-label">${flight.flight || "Flight"}</span>
+                  <h3>${flight.route}</h3>
+                  <p>${flight.time}</p>
+                </div>
+              </article>
+            `).join("")}
+            ${data.train ? `
+              <article class="glass-card transport-card">
+                <img src="${data.train.image}" alt="Train for this journey" loading="lazy">
+                <div class="card-body">
+                  <span class="card-label">${data.train.operator}</span>
+                  <h3>${data.train.route}</h3>
+                  <p>${data.train.time}</p>
+                  <small>${data.train.details || ""}</small>
+                </div>
+              </article>
+            ` : ""}
           </div>
+        </section>
+      ` : ""}
 
-          <form id="airport-pairing-form" class="space-y-4 text-left">
-            <div>
-              <label for="airportGiverName" class="block text-sm font-semibold text-gray-800 mb-2">Your name:</label>
-              <select id="airportGiverName" name="giver" required
-                class="w-full px-4 py-3 rounded-lg border border-white/40 bg-white/80 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="">Select your name</option>
-              </select>
-            </div>
+      ${weatherStops.length ? `
+        <section class="trip-section scroll-reveal">
+          ${sectionHeading("Weather for the journey", "A live daily forecast for each stop", "fa-cloud-sun")}
+          <div id="weather-grid" class="weather-grid" aria-live="polite">
+            ${weatherStops.map(stop => `
+              <article class="glass-card weather-city" data-weather-city="${stop.city}">
+                <div class="weather-city-head"><div><span class="card-label">${stop.dates}</span><h3>${stop.city}</h3></div><i class="fas fa-circle-notch fa-spin"></i></div>
+                <p class="weather-status">Loading the latest forecast…</p>
+              </article>
+            `).join("")}
+          </div>
+          <p class="weather-credit">Forecast updates live from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. Conditions may change.</p>
+        </section>
+      ` : ""}
 
-            <button type="submit" id="airportPairingButton"
-              class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
-              Generate my person 🎲
-            </button>
+      ${hotels.length ? `
+        <section class="trip-section scroll-reveal">
+          ${sectionHeading("Where we’re staying", "A comfortable base for the journey", "fa-bed")}
+          <div class="stay-grid">
+            ${hotels.map(hotel => `
+              <article class="glass-card stay-card">
+                <img src="${hotel.image}" alt="${hotel.name}" loading="lazy">
+                <div class="card-body">
+                  <span class="card-label">${hotel.location || "Trip stay"}</span>
+                  <h3>${hotel.name}</h3>
+                  <p>${hotel.nights}</p>
+                  ${hotel.link ? `<a href="${hotel.link}" target="_blank" rel="noopener" class="text-link">View stay <i class="fas fa-arrow-right"></i></a>` : ""}
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+      ` : ""}
 
-            <div id="airportShuffleBox" class="hidden text-center bg-white/70 border border-white/40 rounded-xl px-4 py-5" aria-live="polite">
-              <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Shuffling names...</p>
-              <p id="airportShuffleName" class="text-3xl font-bold text-indigo-700 mt-2">?</p>
-            </div>
+      ${tshirtResults.length ? `
+        <section class="trip-section scroll-reveal">
+          ${sectionHeading("T-shirt draw results", "The game is finished — here’s the final gifting list", "fa-shirt")}
+          <div class="results-grid">
+            ${tshirtResults.map(result => `
+              <article class="glass-card result-card">
+                <div class="result-person"><span>${result.giver}</span><i class="fas fa-arrow-right"></i><strong>${result.receiver}</strong></div>
+                <p>Receiver size <b>${result.size}</b></p>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+      ` : ""}
 
-            <p id="airportPairingError" class="hidden text-sm text-red-700 font-semibold text-center bg-red-50/80 border border-red-200 rounded-lg px-4 py-3">
-              Something went wrong while generating your person. Please try again.
-            </p>
-          </form>
-
-          <div id="airportPairingResult" class="hidden" aria-live="polite"></div>
-
-        </div>
-      </section>
-      ` : ''}
-
-      <!-- Timeline -->
-      <section class="scroll-reveal">
-        <h2 class="text-2xl font-bold text-white mb-6">🗺️ Our Journey</h2>
-
-        <div class="space-y-8">
-          ${data.itinerary.map((i, index) => `
-            <div class="flex items-start gap-6">
-
-              <div class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-600 text-white font-bold shadow-lg">
-                ${index + 1}
-              </div>
-
-              <div class="flex-1 bg-white/60 backdrop-blur-md p-6 rounded-2xl shadow border border-white/30 hover:shadow-xl transition">
-                <h3 class="font-semibold text-lg mb-2">${i.title}</h3>
-
-                <ul class="space-y-1 text-gray-700">
-                  ${i.items.map(it => `
-                    <li class="flex items-center gap-2">
-                      <span class="text-indigo-500">•</span>
-                      ${it}
-                    </li>
-                  `).join("")}
-                </ul>
-              </div>
-
-            </div>
-          `).join("")}
-        </div>
-      </section>
-
+      ${itinerary.length ? `
+        <section class="trip-section scroll-reveal">
+          ${sectionHeading("Trip story", "The itinerary, day by day", "fa-map-location-dot")}
+          <div class="timeline">
+            ${itinerary.map((day, index) => `
+              <article class="timeline-row">
+                <div class="timeline-marker"><span>${String(index + 1).padStart(2, "0")}</span></div>
+                <div class="glass-card timeline-card">
+                  <span class="card-label">${day.date || ""}</span>
+                  <h3>${day.title}</h3>
+                  <ul>${(Array.isArray(day.items) ? day.items : []).map(item => `<li><span></span>${item}</li>`).join("")}</ul>
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+      ` : ""}
     </div>
   `;
 
   initScrollAnimations();
-
-  if (isSpain) {
-    initAirportPairingGenerator();
-  }
+  loadTripWeather(weatherStops);
 }
 
+// Kept as an alias for any older page that still calls the original renderer name.
+function renderSpainTrip(data) {
+  renderTrip(data);
+}
 
+function sectionHeading(title, subtitle, icon) {
+  return `<div class="section-heading"><div class="section-icon"><i class="fas ${icon}"></i></div><div><h2>${title}</h2><p>${subtitle}</p></div></div>`;
+}
 
+const weatherDescriptions = {
+  0: ["Clear", "fa-sun"], 1: ["Mostly clear", "fa-sun"], 2: ["Partly cloudy", "fa-cloud-sun"], 3: ["Overcast", "fa-cloud"],
+  45: ["Foggy", "fa-smog"], 48: ["Rime fog", "fa-smog"], 51: ["Light drizzle", "fa-cloud-rain"], 53: ["Drizzle", "fa-cloud-rain"],
+  55: ["Heavy drizzle", "fa-cloud-showers-heavy"], 61: ["Light rain", "fa-cloud-rain"], 63: ["Rain", "fa-cloud-showers-heavy"],
+  65: ["Heavy rain", "fa-cloud-showers-heavy"], 80: ["Rain showers", "fa-cloud-rain"], 81: ["Rain showers", "fa-cloud-showers-heavy"],
+  82: ["Heavy showers", "fa-cloud-showers-heavy"], 95: ["Thunderstorms", "fa-cloud-bolt"], 96: ["Storms and hail", "fa-cloud-bolt"], 99: ["Storms and hail", "fa-cloud-bolt"]
+};
 
-// ================= AIRPORT PAIRING GENERATOR =================
-
-const AIRPORT_PARTICIPANTS = [
-  "Cenvy",
-  "Conchita",
-  "Dillon",
-  "Jovita",
-  "Leander",
-  "Lionel",
-  "Sonal",
-  "Zachery"
-];
-
-function initAirportPairingGenerator() {
-  const form = document.getElementById("airport-pairing-form");
-  const select = document.getElementById("airportGiverName");
-  const button = document.getElementById("airportPairingButton");
-  const shuffleBox = document.getElementById("airportShuffleBox");
-  const shuffleName = document.getElementById("airportShuffleName");
-  const errorMessage = document.getElementById("airportPairingError");
-  const result = document.getElementById("airportPairingResult");
-
-  if (!form || !select || !button || !shuffleBox || !shuffleName || !errorMessage || !result) return;
-
-  AIRPORT_PARTICIPANTS.forEach((name) => {
-    const option = document.createElement("option");
-    option.value = name;
-    option.textContent = name;
-    select.appendChild(option);
-  });
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (!form.reportValidity()) return;
-
-    const giver = select.value;
-    const displayNames = AIRPORT_PARTICIPANTS.filter((name) => name !== giver);
-    let shuffleIndex = 0;
-
-    button.disabled = true;
-    button.textContent = "Generating...";
-    button.classList.add("opacity-70", "cursor-not-allowed");
-    errorMessage.classList.add("hidden");
-    result.classList.add("hidden");
-    result.innerHTML = "";
-    shuffleBox.classList.remove("hidden");
-    shuffleName.textContent = "?";
-
-    const shuffleTimer = window.setInterval(() => {
-      const randomOffset = Math.floor(Math.random() * displayNames.length);
-      shuffleIndex = (shuffleIndex + 1 + randomOffset) % displayNames.length;
-      shuffleName.textContent = displayNames[shuffleIndex];
-    }, 90);
-
+async function loadTripWeather(stops) {
+  await Promise.all(stops.map(async stop => {
+    const card = document.querySelector(`[data-weather-city="${stop.city}"]`);
+    if (!card) return;
+    const params = new URLSearchParams({
+      latitude: stop.latitude,
+      longitude: stop.longitude,
+      daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+      timezone: stop.timezone || "Europe/Madrid",
+      start_date: stop.startDate,
+      end_date: stop.endDate
+    });
     try {
-      const assignmentRequest = fetch("/.netlify/functions/airportAssignment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ giver })
-      });
-
-      await new Promise((resolve) => window.setTimeout(resolve, 1500));
-
-      const response = await assignmentRequest;
-
-      if (!response.ok) {
-        throw new Error(`Assignment request failed with status ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (!data.success || !data.receiver) {
-        throw new Error("Assignment response was missing receiver details");
-      }
-
-      window.clearInterval(shuffleTimer);
-      shuffleName.textContent = data.receiver.name;
-
-      window.setTimeout(() => {
-        shuffleBox.classList.add("hidden");
-        renderAirportPairingResult(result, data);
-        button.disabled = false;
-        button.textContent = "Reveal again 🎲";
-        button.classList.remove("opacity-70", "cursor-not-allowed");
-      }, 450);
+      const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+      if (!response.ok) throw new Error("Forecast unavailable");
+      const payload = await response.json();
+      card.querySelector(".fa-spin")?.remove();
+      card.querySelector(".weather-status")?.remove();
+      const days = payload.daily.time.map((date, index) => {
+        const [label, icon] = weatherDescriptions[payload.daily.weather_code[index]] || ["Mixed", "fa-cloud-sun"];
+        const dateLabel = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric" }).format(new Date(`${date}T12:00:00`));
+        return `<div class="weather-day"><span>${dateLabel}</span><i class="fas ${icon}" title="${label}"></i><strong>${Math.round(payload.daily.temperature_2m_max[index])}°</strong><small>${Math.round(payload.daily.temperature_2m_min[index])}° · ${payload.daily.precipitation_probability_max[index] ?? 0}% rain</small></div>`;
+      }).join("");
+      card.insertAdjacentHTML("beforeend", `<div class="weather-days">${days}</div>`);
     } catch (error) {
-      console.error("Airport pairing generation failed:", error);
-      window.clearInterval(shuffleTimer);
-      shuffleBox.classList.add("hidden");
-      errorMessage.classList.remove("hidden");
-      button.disabled = false;
-      button.textContent = "Generate my person 🎲";
-      button.classList.remove("opacity-70", "cursor-not-allowed");
+      const status = card.querySelector(".weather-status");
+      card.querySelector(".fa-spin")?.remove();
+      if (status) status.textContent = "The live forecast is temporarily unavailable. Please check again shortly.";
     }
-  });
+  }));
 }
-
-function renderAirportPairingResult(result, data) {
-  const sizeText = data.receiver.tshirtSize || "Size not added yet";
-
-  result.innerHTML = `
-    <div class="bg-white/75 border border-white/50 rounded-2xl p-6 text-center shadow-inner space-y-5">
-      <div class="text-5xl">👕</div>
-      <div>
-        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide">${data.giver.name}, you are giving a funny T-shirt to</p>
-        <h3 class="text-4xl font-extrabold text-indigo-700 mt-2">${data.receiver.name}</h3>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
-        <div class="bg-white/80 rounded-xl px-4 py-4 border border-white/60">
-          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Receiver Name</p>
-          <p class="text-xl font-bold text-gray-800">${data.receiver.name}</p>
-        </div>
-        <div class="bg-white/80 rounded-xl px-4 py-4 border border-white/60">
-          <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">T-Shirt Size</p>
-          <p class="text-xl font-bold text-gray-800">${sizeText}</p>
-        </div>
-      </div>
-
-    </div>
-  `;
-
-  result.classList.remove("hidden");
-}
-
-// ================= SCROLL =================
 
 function initScrollAnimations() {
-  const elements = document.querySelectorAll('.scroll-reveal');
-
+  const elements = document.querySelectorAll(".scroll-reveal");
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(element => element.classList.add("show"));
+    return;
+  }
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show');
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
-
-  elements.forEach(el => observer.observe(el));
+  }, { threshold: 0.08 });
+  elements.forEach(element => observer.observe(element));
 }

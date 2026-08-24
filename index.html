@@ -6,7 +6,14 @@
     <title>Travel Tales of Dillon & Jovita</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.cdnfonts.com/css/gebuk" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
     <style>
+        .font-gebuk {
+    font-family: 'Gebuk', sans-serif;
+  }
       /* Custom CSS for animations and effects */
       .hero-bg {
         background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('assets/images/dillon-jovita.png');
@@ -125,7 +132,41 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
       }
+
+      :root { --travel-ink:#17221f; --travel-paper:#f8f3e9; --travel-coral:#ef5b35; --travel-teal:#16858b; }
+      body { font-family:'DM Sans',sans-serif !important; color:var(--travel-ink); background:var(--travel-paper) !important; }
+      h1,h2,h3,.font-gebuk { font-family:'DM Serif Display',serif !important; font-weight:400 !important; }
+      nav { background:rgba(255,250,242,.9) !important; border-bottom:1px solid rgba(23,34,31,.08); box-shadow:none !important; backdrop-filter:blur(16px); }
+      .nav-link { font-size:.9rem; font-weight:700; color:#40504a; position:relative; }
+      .nav-link:after { content:''; position:absolute; left:0; right:100%; bottom:-7px; height:2px; background:var(--travel-coral); transition:right .2s ease; }
+      .nav-link:hover:after { right:0; }
+      .hero-bg { z-index:0; background-image:linear-gradient(110deg,rgba(10,27,24,.72),rgba(10,27,24,.12)),url('assets/images/dillon-jovita.png'); }
+      .hero-bg:hover { background-image:linear-gradient(110deg,rgba(10,27,24,.64),rgba(10,27,24,.08)),url('assets/images/dillon-jovita.png'); }
+      .hero-bg h1 { font-size:clamp(3.6rem,9vw,7rem); line-height:.9; text-shadow:0 8px 30px rgba(0,0,0,.25); }
+      .hero-bg p { max-width:720px; margin-left:auto; margin-right:auto; color:rgba(255,255,255,.88); }
+      .bg-indigo-600 { background-color:var(--travel-coral) !important; }
+      .hover\:bg-indigo-700:hover,.hover\:bg-indigo-600:hover { background-color:#d94724 !important; }
+      .text-indigo-600,.text-indigo-800 { color:var(--travel-coral) !important; }
+      .border-indigo-600 { border-color:var(--travel-coral) !important; }
+      .bg-indigo-50 { background-color:#fff1e9 !important; }
+      .bg-indigo-100 { background-color:#ffe2d4 !important; }
+      .text-indigo-200,.text-indigo-300 { color:#ffd0b6 !important; }
+      section { position:relative; }
+      #about,#blog { background:#fffaf2 !important; }
+      #portfolio { background:var(--travel-paper) !important; }
+      .blog-card,.portfolio-card { border:1px solid rgba(23,34,31,.08); border-radius:1.35rem !important; box-shadow:0 14px 40px rgba(23,34,31,.08) !important; transition:transform .3s ease,box-shadow .3s ease; }
+      .blog-card:hover,.portfolio-card:hover { transform:translateY(-6px); box-shadow:0 23px 55px rgba(23,34,31,.14) !important; }
+      .story-coming { display:inline-flex; align-items:center; gap:7px; color:#9a462d; font-weight:700; }
+      .upcoming-card { min-height:210px; display:flex; align-items:flex-end; border-radius:1.35rem; overflow:hidden; position:relative; box-shadow:0 16px 45px rgba(23,34,31,.14); isolation:isolate; }
+      .upcoming-card:before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 20%,rgba(10,26,23,.82)); z-index:-1; }
+      .upcoming-card .trip-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform .5s ease; }
+      .upcoming-card:hover .trip-photo { transform:scale(1.06); }
+      .upcoming-copy { padding:24px; color:white; }
+      .upcoming-copy h3 { font-size:2rem; line-height:1; margin-bottom:6px; }
+      .upcoming-copy p { color:rgba(255,255,255,.78); font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; font-weight:700; }
+      footer { background:#13211e !important; }
     </style>
+    <link rel="stylesheet" href="assets/site-theme.css">
   </head>
   <body class="font-sans bg-gray-50 text-gray-800">
     <!-- Navigation -->
@@ -134,7 +175,7 @@
         <div class="flex justify-between items-center py-4">
           <div class="flex items-center space-x-4">
             <div class="flex items-center">
-              <span class="text-xl font-bold text-black-600">Travel Tales of Dillon & Jovita</span>
+              <a href="index.html" class="text-xl font-bold text-black-600">Travel Tales of Dillon &amp; Jovita</a>
             </div>
           </div>
           <div class="hidden md:flex items-center space-x-6">
@@ -161,9 +202,13 @@
     <section class="hero-container relative min-h-screen overflow-hidden">
       <div class="hero-bg min-h-screen flex items-center justify-center text-center text-white px-4 opacity-100 transition-opacity duration-500">
         <div class="max-w-4xl mx-auto fade-in">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6">Travel Tales of <span class="text-indigo-300">Dillon & Jovita</span>
-          </h1>
-          <p class="text-xl md:text-2xl mb-8 leading-relaxed">Exploring the world one adventure at a time. Join us on our journey as we discover hidden gems and create unforgettable memories.</p>
+          <p class="uppercase tracking-[0.28em] text-sm font-bold text-orange-100 mb-5">A shared journal of places, people &amp; plates</p>
+        <!--  <h1 class="text-4xl md:text-6xl font-bold mb-6">Travel Tales of <span class="text-indigo-300">Dillon & Jovita</span>
+          </h1>-->
+          <h1 class="font-gebuk text-4xl md:text-6xl font-bold mb-6">
+  Travel Tales of <span class="text-indigo-300">Dillon & Jovita</span>
+</h1>
+          <p class="text-xl md:text-2xl mb-8 leading-relaxed">One life, two passports and a growing collection of stories from the road.</p>
           <div class="flex flex-col items-center gap-4">
             <div class="flex flex-col sm:flex-row justify-center gap-4">
               <a href="#blog" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105"> Explore Our Adventures </a>
@@ -228,7 +273,7 @@
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">Read about our experiences, tips, and travel hacks from around the world</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Blog Post 1 -->
+          <!-- Georgia -->
           <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
             <div class="relative overflow-hidden h-64">
               <img src="assets/images/Georgia.jpeg" alt="Georgia travel story" class="blog-image w-full h-full object-cover transition duration-500">
@@ -246,26 +291,27 @@
               </div>
             </div>
           </div>
-          
-          <!-- Blog Post 3 -->
+
+          <!-- New York -->
           <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
             <div class="relative overflow-hidden h-64">
-              <img src="assets/images/Malham/MC_C.jpg" alt="Malham Cove travel story" class="blog-image w-full h-full object-cover transition duration-500">
+              <img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Snowy New York skyline" class="blog-image w-full h-full object-cover transition duration-500">
             </div>
             <div class="p-6">
               <div class="flex justify-between items-center mb-4">
-                <span class="text-sm text-gray-500">May 2025</span>
-                <span class="text-sm font-medium px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full">Day Hike</span>
+                <span class="text-sm text-gray-500">January 2026</span>
+                <span class="text-sm font-medium px-3 py-1 bg-sky-100 text-sky-800 rounded-full">City Break</span>
               </div>
-              <h3 class="text-xl font-bold mb-3 text-gray-800">Malham Cove</h3>
-              <p class="text-gray-600 mb-4">Waterfalls, a Harry Potter cliff, a Yorkshire Dales circular hike, and a freezing-cold swim at Janet&#x27;s Foss.</p>
+              <h3 class="text-xl font-bold mb-3 text-gray-800">New York in the Snow</h3>
+              <p class="text-gray-600 mb-4">Five birthday days of skyline views, bagels, a helicopter ride, Central Park, DUMBO and an empty Times Square at 4am.</p>
               <div class="flex justify-between items-center">
-                <a href="malham-cove.html" class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300"> Read More <i class="fas fa-arrow-right ml-1"></i>
+                <a href="new-york.html" class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-300"> Read More <i class="fas fa-arrow-right ml-1"></i>
                 </a>
               </div>
             </div>
           </div>
-<!-- Blog Post 2 -->
+
+          <!-- Turkey -->
           <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
             <div class="relative overflow-hidden h-64">
               <img src="assets/images/Turkey/TC_2.jpeg" alt="Turkey travel story" class="blog-image w-full h-full object-cover transition duration-500">
@@ -340,32 +386,17 @@
           <p class="text-xl text-gray-600 max-w-2xl mx-auto"> A look at the journeys we’re planning next </p>
         </div>
         <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <!-- Portugal -->
-          <a href="upcoming.html?trip=portugal" class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://flagcdn.com/w640/pt.png');"></div>
-            <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
-            <div class="relative p-8 text-center">
-              <h3 class="text-xl font-bold text-gray-800 mb-1">Portugal</h3>
-              <p class="text-gray-600">June</p>
-            </div>
+          <a href="upcoming.html?trip=spain" class="upcoming-card group" aria-label="Open the Spain trip plan">
+            <img class="trip-photo" src="assets/images/Spain/Spain_Main.jpg" alt="Colourful streets in Spain">
+            <div class="upcoming-copy"><p>25–31 August 2026</p><h3>Spain</h3><span>València → Madrid <i class="fas fa-arrow-right ml-1"></i></span></div>
           </a>
-          <!-- Spain -->
-          <a href="upcoming.html?trip=spain" class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://flagcdn.com/w640/es.png');"></div>
-            <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
-            <div class="relative p-8 text-center">
-              <h3 class="text-xl font-bold text-gray-800 mb-1">Spain</h3>
-              <p class="text-gray-600">August</p>
-            </div>
+          <a href="upcoming.html?trip=france" class="upcoming-card group" aria-label="See the upcoming France trip">
+            <img class="trip-photo" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=1100&amp;q=85" alt="Paris rooftops and the Eiffel Tower">
+            <div class="upcoming-copy"><p>In planning</p><h3>France</h3><span>Story taking shape <i class="fas fa-arrow-right ml-1"></i></span></div>
           </a>
-          <!-- Greece -->
-          <a href="upcoming.html?trip=greece" class="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition duration-300 group">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://flagcdn.com/w640/gb.png');"></div>
-            <div class="absolute inset-0 bg-white/80 group-hover:bg-white/70 transition"></div>
-            <div class="relative p-8 text-center">
-              <h3 class="text-xl font-bold text-gray-800 mb-1">United Kingdom</h3>
-              <p class="text-gray-600"></p>
-            </div>
+          <a href="upcoming.html?trip=finland" class="upcoming-card group" aria-label="See the upcoming Finland trip">
+            <img class="trip-photo" src="https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&amp;fit=crop&amp;w=1100&amp;q=85" alt="Northern lights over Finland">
+            <div class="upcoming-copy"><p>In planning</p><h3>Finland</h3><span>Nordic chapter ahead <i class="fas fa-arrow-right ml-1"></i></span></div>
           </a>
         </div>
       </div>
@@ -652,5 +683,6 @@
         });
       });
     </script>
+    <script src="assets/site-enhancements.js"></script>
   </body>
 </html>

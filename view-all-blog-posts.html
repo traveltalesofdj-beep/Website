@@ -3,189 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View All Blog Posts | Travel Tales of Dillon & Jovita</title>
+  <title>All Travel Stories | Travel Tales of Dillon &amp; Jovita</title>
+  <meta name="description" content="Every Travel Tales story — city breaks, road trips, island escapes, food discoveries and honest lessons from Dillon and Jovita.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/site-theme.css">
   <style>
-    .blog-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .blog-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    .blog-card:hover .blog-image {
-      transform: scale(1.05);
-    }
+    .stories-hero { background-image:linear-gradient(110deg,rgba(12,32,28,.86),rgba(12,32,28,.28)),url('assets/images/dillon-jovita.png'); background-size:cover; background-position:center 42%; }
+    .stories-hero h1 { font-size:clamp(3.6rem,9vw,7rem); line-height:.9; }
+    .story-filter[aria-pressed="true"] { color:white; background:#ef5b35; border-color:#ef5b35; }
   </style>
 </head>
-<body class="font-sans bg-gray-50 text-gray-800">
-
-  <!-- Navigation -->
+<body>
   <nav class="bg-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-between items-center py-4">
-        <a href="index.html" class="text-xl font-bold text-black-600">Travel Tales of Dillon & Jovita</a>
-        <div class="hidden md:flex items-center space-x-6">
-          <a href="index.html" class="text-gray-600 hover:text-indigo-600 transition">Home</a>
-          <a href="index.html#portfolio" class="text-gray-600 hover:text-indigo-600 transition">Our Journeys</a>
-          <a href="view-all-blog-posts.html" class="text-indigo-600 font-semibold">Blog</a>
-          <a href="index.html#about" class="text-gray-600 hover:text-indigo-600 transition">About Us</a>
-          <a href="index.html#contact" class="text-gray-600 hover:text-indigo-600 transition">Contact</a>
-        </div>
-        <button id="menu-toggle" class="md:hidden text-indigo-600 focus:outline-none" aria-label="Open menu">
-          <i class="fas fa-bars text-2xl"></i>
-        </button>
-      </div>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4">
-      <a href="index.html" class="block py-2 text-gray-600 border-b border-gray-200">Home</a>
-      <a href="index.html#portfolio" class="block py-2 text-gray-600 border-b border-gray-200">Our Journeys</a>
-      <a href="view-all-blog-posts.html" class="block py-2 text-indigo-600 border-b border-gray-200 font-semibold">Blog</a>
-      <a href="index.html#about" class="block py-2 text-gray-600 border-b border-gray-200">About Us</a>
-      <a href="index.html#contact" class="block py-2 text-gray-600">Contact</a>
-    </div>
+    <div class="max-w-6xl mx-auto px-4"><div class="flex justify-between items-center py-4">
+      <a href="index.html" class="text-xl font-bold">Travel Tales of Dillon &amp; Jovita</a>
+      <div class="hidden md:flex items-center space-x-6"><a href="index.html">Home</a><a href="index.html#portfolio">Our Journeys</a><a href="view-all-blog-posts.html" class="text-indigo-600">Blog</a><a href="index.html#about">About Us</a><a href="index.html#contact">Contact</a></div>
+      <button id="menu-toggle" class="md:hidden text-indigo-600" aria-label="Open menu"><i class="fas fa-bars text-2xl"></i></button>
+    </div></div>
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4"><a href="index.html" class="block py-2">Home</a><a href="index.html#portfolio" class="block py-2">Our Journeys</a><a href="view-all-blog-posts.html" class="block py-2">Blog</a><a href="index.html#about" class="block py-2">About Us</a><a href="index.html#contact" class="block py-2">Contact</a></div>
   </nav>
 
-  <!-- Hero -->
-  <section class="bg-indigo-600 text-white py-20">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p class="uppercase tracking-widest text-indigo-200 text-sm font-semibold mb-4">Travel Tales Blog</p>
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">View All Blog Posts</h1>
-      <p class="text-lg md:text-xl text-indigo-100 max-w-3xl mx-auto">
-        A growing collection of our travel stories, memories, tips, and trip notes from around the world.
-      </p>
+  <header class="stories-hero min-h-[620px] flex items-end text-white">
+    <div class="max-w-6xl mx-auto px-4 pb-16 md:pb-20 w-full">
+      <p class="uppercase tracking-[.28em] text-sm font-bold text-orange-100 mb-5">The complete journal</p>
+      <h1 class="max-w-4xl mb-6">Stories from the road</h1>
+      <p class="text-lg md:text-2xl text-white/85 max-w-2xl">The beautiful bits, the difficult bits and the lessons we wish someone had told us first.</p>
     </div>
-  </section>
+  </header>
 
-  <!-- Blog Posts -->
-  <main class="py-16">
+  <main class="py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-800">Latest Stories</h2>
-          <p class="text-gray-600 mt-2">Select a story to read the full post.</p>
-        </div>
-        <a href="index.html#blog" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition">
-          Back to latest stories <i class="fas fa-arrow-right ml-2"></i>
-        </a>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div><p class="uppercase tracking-widest text-xs font-bold text-indigo-600 mb-2">Travel Tales archive</p><h2 class="text-4xl md:text-5xl">Choose your next story</h2></div>
+        <div class="flex flex-wrap gap-2" aria-label="Filter stories"><button class="story-filter border border-gray-300 rounded-full px-4 py-2 font-semibold" data-filter="all" aria-pressed="true">All</button><button class="story-filter border border-gray-300 rounded-full px-4 py-2 font-semibold" data-filter="city" aria-pressed="false">Cities</button><button class="story-filter border border-gray-300 rounded-full px-4 py-2 font-semibold" data-filter="nature" aria-pressed="false">Nature</button><button class="story-filter border border-gray-300 rounded-full px-4 py-2 font-semibold" data-filter="food" aria-pressed="false">Food &amp; culture</button></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Georgia -->
-        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
-          <a href="georgia.html" class="block relative overflow-hidden h-72">
-            <img src="assets/images/Georgia.jpeg" alt="Georgia travel story" class="blog-image w-full h-full object-cover transition duration-500">
-          </a>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-3 justify-between items-center mb-4">
-              <span class="text-sm text-gray-500">May 2026</span>
-              <span class="text-sm font-medium px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full">Trips</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-gray-800">Georgia</h3>
-            <p class="text-gray-600 mb-5">
-              A 9-night Georgia route through Tbilisi, Kazbegi, Kutaisi and Kakheti, with practical tips and honest travel notes.
-            </p>
-            <a href="georgia.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition">
-              Read More <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
+      <div id="story-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="story-card" data-tags="city nature food">
+          <a href="new-york.html" class="block h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Snowy New York City" class="w-full h-full object-cover"></a>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>January 2026</span><span class="px-3 py-1 bg-sky-100 text-sky-800 rounded-full font-semibold">City Break</span></div><h3 class="text-2xl mb-3">New York in the Snow</h3><p class="text-gray-600 mb-5">A birthday trip of skyline views, bagels, film locations, a helicopter ride and Times Square at 4am.</p><a href="new-york.html" class="text-indigo-600 font-bold">Read the story <i class="fas fa-arrow-right ml-1"></i></a></div>
         </article>
 
-
-        <!-- Malham Cove -->
-        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
-          <a href="malham-cove.html" class="block relative overflow-hidden h-72">
-            <img src="assets/images/Malham/MC_C.jpg" alt="Malham Cove travel story" class="blog-image w-full h-full object-cover transition duration-500">
-          </a>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-3 justify-between items-center mb-4">
-              <span class="text-sm text-gray-500">May 2025</span>
-              <span class="text-sm font-medium px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full">Day Hike</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-gray-800">Malham Cove</h3>
-            <p class="text-gray-600 mb-5">
-              A Yorkshire Dales day hike with Janet&#x27;s Foss, Gordale Scar, the Harry Potter cliff, and a freezing-cold swim.
-            </p>
-            <a href="malham-cove.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition">
-              Read More <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
+        <article class="story-card" data-tags="city food">
+          <a href="vietnam.html" class="block h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Lanterns in Hoi An, Vietnam" class="w-full h-full object-cover"></a>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>Pre-wedding adventure</span><span class="px-3 py-1 bg-rose-100 text-rose-800 rounded-full font-semibold">Food &amp; Culture</span></div><h3 class="text-2xl mb-3">The Vietnam Wedding Dress Mission</h3><p class="text-gray-600 mb-5">Hanoi, Hoi An, Ba Na Hills and HCMC — thirteen days before the wedding and chasing a custom gown.</p><a href="vietnam.html" class="text-indigo-600 font-bold">Read the story <i class="fas fa-arrow-right ml-1"></i></a></div>
         </article>
 
-        
-        <!-- Turkey -->
-        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
-          <a href="turkey.html" class="block relative overflow-hidden h-72">
-            <img src="assets/images/Turkey/TC_2.jpeg" alt="Turkey travel story" class="blog-image w-full h-full object-cover transition duration-500">
-          </a>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-3 justify-between items-center mb-4">
-              <span class="text-sm text-gray-500">March 2024</span>
-              <span class="text-sm font-medium px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Trips</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-gray-800">Turkey</h3>
-            <p class="text-gray-600 mb-5">
-              A first-trip-together route through Istanbul, Cappadocia, Antalya and Pamukkale, with practical tips, weather surprises and honest reflections.
-            </p>
-            <a href="turkey.html" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition">
-              Read More <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
+        <article class="story-card" data-tags="nature food">
+          <div class="relative h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1554921677-5b06dd4782bd?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Madeira coast in Portugal" class="w-full h-full object-cover"><span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 text-xs font-bold text-orange-800">Story coming soon</span></div>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>June 2026</span><span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full font-semibold">Island Escape</span></div><h3 class="text-2xl mb-3">Madeira, Portugal</h3><p class="text-gray-600 mb-5">The clifftop roads, Atlantic views and island notes are being shaped into our next story.</p><span class="font-bold text-orange-700"><i class="fas fa-pen-nib mr-2"></i>Story coming soon</span></div>
+        </article>
+
+        <article class="story-card" data-tags="nature food">
+          <a href="georgia.html" class="block h-64 overflow-hidden"><img src="assets/images/Georgia.jpeg" alt="Georgia mountains" class="w-full h-full object-cover"></a>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>May 2026</span><span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full font-semibold">Road Trip</span></div><h3 class="text-2xl mb-3">Georgia</h3><p class="text-gray-600 mb-5">Nine nights through Tbilisi, Kazbegi, Kutaisi and Kakheti, with practical tips and honest notes.</p><a href="georgia.html" class="text-indigo-600 font-bold">Read the story <i class="fas fa-arrow-right ml-1"></i></a></div>
+        </article>
+
+        <article class="story-card" data-tags="nature">
+          <a href="malham-cove.html" class="block h-64 overflow-hidden"><img src="assets/images/Malham/MC_C.jpg" alt="Malham Cove" class="w-full h-full object-cover"></a>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>May 2025</span><span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full font-semibold">Day Hike</span></div><h3 class="text-2xl mb-3">Malham Cove</h3><p class="text-gray-600 mb-5">Waterfalls, a Harry Potter cliff, a Yorkshire Dales hike and a freezing-cold swim.</p><a href="malham-cove.html" class="text-indigo-600 font-bold">Read the story <i class="fas fa-arrow-right ml-1"></i></a></div>
+        </article>
+
+        <article class="story-card" data-tags="city nature food">
+          <a href="turkey.html" class="block h-64 overflow-hidden"><img src="assets/images/Turkey/TC_2.jpeg" alt="Turkey travel story" class="w-full h-full object-cover"></a>
+          <div class="p-6"><div class="flex justify-between gap-3 text-sm text-gray-500 mb-4"><span>March 2024</span><span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-semibold">First Trip</span></div><h3 class="text-2xl mb-3">Turkey</h3><p class="text-gray-600 mb-5">Istanbul, Cappadocia, Antalya and Pamukkale — the relationship stress test that became a favourite memory.</p><a href="turkey.html" class="text-indigo-600 font-bold">Read the story <i class="fas fa-arrow-right ml-1"></i></a></div>
         </article>
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="md:col-span-2">
-          <div class="flex items-center mb-4">
-            <img src="https://via.placeholder.com/40/6366f1/ffffff?text=TT" alt="Travel Tales Logo" class="h-10 w-10">
-            <span class="ml-2 text-xl font-bold text-indigo-400">Travel Tales</span>
-          </div>
-          <p class="text-gray-400 mb-4">Documenting our travels, sharing our stories, and inspiring others to explore the world.</p>
-          <div class="flex space-x-4">
-            <a href="https://instagram.com/traveltalesofdj" target="_blank" class="text-gray-400 hover:text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://youtube.com/@JovitaDcosta" target="_blank" class="text-gray-400 hover:text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4 text-white">Explore</h3>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
-            <li><a href="index.html#portfolio" class="text-gray-400 hover:text-white transition">Our Journeys</a></li>
-            <li><a href="view-all-blog-posts.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
-            <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
-            <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold mb-4 text-white">Story Status</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li>Georgia: Full post added</li>
-            <li>Turkey: Full post added</li>
-            <li>Malham Cove: Full post added</li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2026 Travel Tales of Dillon & Jovita. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+  <section class="py-16 text-white" style="background:#16858b;"><div class="max-w-4xl mx-auto px-4 text-center"><p class="uppercase tracking-[.24em] text-xs font-bold text-white/70 mb-3">Keep the stories coming</p><h2 class="text-4xl md:text-5xl mb-4">Enjoying Travel Tales?</h2><p class="text-white/80 text-lg mb-7">A coffee helps us keep building guides, photo diaries and honest travel stories.</p><a href="https://buymeacoffee.com/traveltalesofdj" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold" style="color:#16858b;"><i class="fas fa-mug-hot"></i>Buy us a coffee</a></div></section>
+  <footer class="bg-gray-900 text-white py-10"><div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row gap-4 justify-between items-center"><p>© 2026 Travel Tales of Dillon &amp; Jovita</p><div class="flex gap-4"><a href="index.html">Home</a><a href="https://instagram.com/traveltalesofdj" target="_blank" rel="noopener">Instagram</a><a href="https://youtube.com/@JovitaDcosta" target="_blank" rel="noopener">YouTube</a></div></div></footer>
 
   <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
+    const menuToggle=document.getElementById('menu-toggle');const mobileMenu=document.getElementById('mobile-menu');if(menuToggle&&mobileMenu)menuToggle.addEventListener('click',()=>mobileMenu.classList.toggle('hidden'));
+    const filters=document.querySelectorAll('.story-filter');const cards=document.querySelectorAll('#story-grid [data-tags]');filters.forEach(button=>button.addEventListener('click',()=>{filters.forEach(item=>item.setAttribute('aria-pressed','false'));button.setAttribute('aria-pressed','true');const filter=button.dataset.filter;cards.forEach(card=>card.classList.toggle('hidden',filter!=='all'&&!card.dataset.tags.split(' ').includes(filter)));}));
   </script>
+  <script src="assets/site-enhancements.js"></script>
 </body>
 </html>
