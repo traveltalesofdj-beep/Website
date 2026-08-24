@@ -44,7 +44,7 @@ function jsonResponse(statusCode, body) {
   };
 }
 
-export async function handler(event) {
+exports.handler = async function handler(event) {
   if (event.httpMethod !== "POST") {
     return jsonResponse(405, { success: false, message: "Method not allowed" });
   }
@@ -79,4 +79,4 @@ export async function handler(event) {
       tshirtSize: cleanTshirtSize(TSHIRT_SIZES[receiverName])
     }
   });
-}
+};
