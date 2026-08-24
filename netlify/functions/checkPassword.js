@@ -1,17 +1,12 @@
-const crypto = require("node:crypto");
 const spainTrip = require("./_data/spain.cjs");
-const portugalTrip = require("./_data/portugal.cjs");
 
 const trips = {
   spain: {
-    passwordVariable: "SPAIN_PASSWORD",
     data: spainTrip
-  },
-  portugal: {
-    passwordVariable: "PORTUGAL_PASSWORD",
-    data: portugalTrip
   }
 };
+
+const TRIP_PASSWORD = "Valencia2026";
 
 function jsonResponse(statusCode, body, extraHeaders = {}) {
   return {
@@ -26,15 +21,7 @@ function jsonResponse(statusCode, body, extraHeaders = {}) {
 }
 
 function passwordsMatch(submitted, expected) {
-  if (typeof submitted !== "string" || typeof expected !== "string" || !expected) {
-    return false;
-  }
-
-  const submittedBuffer = Buffer.from(submitted, "utf8");
-  const expectedBuffer = Buffer.from(expected, "utf8");
-
-  return submittedBuffer.length === expectedBuffer.length
-    && crypto.timingSafeEqual(submittedBuffer, expectedBuffer);
+  return typeof submitted === "string" && submitted === expected;
 }
 
 exports.handler = async function handler(event) {
@@ -62,14 +49,7 @@ exports.handler = async function handler(event) {
     return jsonResponse(401, { success: false, message: "Invalid trip or password" });
   }
 
-  const expectedPassword = process.env[trip.passwordVariable];
-
-  if (!expectedPassword) {
-    console.error(`Missing required environment variable: ${trip.passwordVariable}`);
-    return jsonResponse(503, { success: false, message: "Trip access is not configured" });
-  }
-
-  if (!passwordsMatch(requestBody.password, expectedPassword)) {
+  if (!passwordsMatch(requestBody.password, TRIP_PASSWORD)) {
     return jsonResponse(401, { success: false, message: "Invalid trip or password" });
   }
 
