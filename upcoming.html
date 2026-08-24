@@ -189,7 +189,9 @@
     <section id="trip-content" class="trip-shell hidden"><div id="trip-root"></div></section>
   </main>
   <script src="render.js"></script>
+  <script src="assets/spain-trip.js"></script>
   <script>
+    const TRIP_PASSWORD = "Valencia2026";
     const tripMeta = {
       spain: { title: "España", background: "https://images.unsplash.com/photo-1725208179317-c5e56702816a?auto=format&fit=crop&w=2000&q=88" },
       france: { title: "France", background: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=2000&q=88", copy: "A French chapter is taking shape. Routes, dates and favourite stops will appear here as plans settle." },
@@ -209,64 +211,34 @@
       content.innerHTML = `<div class="planning-card"><div><span class="trip-kicker">Upcoming journey</span><h1>${activeMeta.title}</h1><p>${activeMeta.copy}</p><a class="trip-button" href="index.html#portfolio" style="margin-top:20px;">See all upcoming trips <i class="fas fa-arrow-right"></i></a></div></div>`;
     }
 
-    async function handleLogin(event) {
+    function handleLogin(event) {
       event.preventDefault();
 
       const passwordInput = document.getElementById("trip-password");
       const error = document.getElementById("trip-error");
       const content = document.getElementById("trip-content");
-      const submitButton = event.currentTarget.querySelector('button[type="submit"]');
-      const originalButtonHtml = submitButton.innerHTML;
 
       error.classList.add("hidden");
-      submitButton.disabled = true;
-      submitButton.textContent = "Checking…";
 
-      try {
-        const response = await fetch("/.netlify/functions/checkPassword", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ trip, password: passwordInput.value })
-        });
-
-        let payload;
-
-        try {
-          payload = await response.json();
-        } catch (parseError) {
-          throw new Error("The access service returned an invalid response.");
-        }
-
-        if (!response.ok || !payload.success || !payload.trip) {
-          if (response.status === 401) {
-            error.textContent = "That password didn’t match. Try again.";
-          } else {
-            error.textContent = "We couldn’t unlock the trip right now. Please try again.";
-          }
-          error.classList.remove("hidden");
-          return;
-        }
-
-        renderTrip(payload.trip);
-
-        const welcome = document.createElement("div");
-        welcome.className = "welcome-card scroll-reveal";
-        welcome.innerHTML = `<h2>Welcome to Dillon and Jovita’s inner circle</h2><p>Let’s make this trip unforgettable ✈️</p>`;
-        content.prepend(welcome);
-
-        document.getElementById("trip-lock").classList.add("hidden");
-        content.classList.remove("hidden");
-        passwordInput.value = "";
-        setTimeout(() => welcome.classList.add("show"), 100);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (requestError) {
-        console.error(requestError);
-        error.textContent = "We couldn’t reach the trip access service. Please try again.";
+      if (passwordInput.value !== TRIP_PASSWORD) {
+        error.textContent = "That password didn’t match. Try again.";
         error.classList.remove("hidden");
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonHtml;
+        passwordInput.select();
+        return;
       }
+
+      renderTrip(window.spainTrip);
+
+      const welcome = document.createElement("div");
+      welcome.className = "welcome-card scroll-reveal";
+      welcome.innerHTML = `<h2>Welcome to Dillon and Jovita’s inner circle</h2><p>Let’s make this trip unforgettable ✈️</p>`;
+      content.prepend(welcome);
+
+      document.getElementById("trip-lock").classList.add("hidden");
+      content.classList.remove("hidden");
+      passwordInput.value = "";
+      setTimeout(() => welcome.classList.add("show"), 100);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
   <script src="assets/site-enhancements.js"></script>
