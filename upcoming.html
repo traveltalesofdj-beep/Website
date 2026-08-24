@@ -23,14 +23,6 @@
     .nav-back { color:var(--ink); text-decoration:none; font-size:.92rem; font-weight:700; padding:10px 15px; border-radius:999px; border:1px solid rgba(23,34,31,.14); background:white; }
     #bg-image { position:fixed; inset:0; z-index:-2; background-size:cover; background-position:center; }
     .page-wash { position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(13,31,28,.42),rgba(13,31,28,.76)); }
-    .lock-screen { min-height:calc(100vh - 69px); display:grid; place-items:center; padding:40px 20px; }
-    .lock-card { width:min(470px,100%); padding:42px; text-align:center; color:white; border:1px solid rgba(255,255,255,.3); background:rgba(15,34,31,.46); backdrop-filter:blur(18px); border-radius:30px; box-shadow:0 26px 80px rgba(0,0,0,.28); }
-    .lock-card .eyebrow { letter-spacing:.2em; text-transform:uppercase; color:#ffd39f; font-weight:700; font-size:.72rem; }
-    .lock-card h1 { font-size:clamp(2.7rem,9vw,4.5rem); line-height:.95; margin:14px 0 8px; }
-    .lock-card p { color:rgba(255,255,255,.78); margin:0 0 26px; }
-    .password-row { display:flex; gap:10px; padding:7px; background:white; border-radius:999px; box-shadow:0 14px 40px rgba(0,0,0,.16); }
-    .password-row input { min-width:0; flex:1; border:0; outline:0; padding:12px 16px; background:transparent; color:var(--ink); }
-    .password-row button { border:0; border-radius:999px; padding:12px 20px; color:white; background:var(--coral); font-weight:700; cursor:pointer; }
     .trip-shell { max-width:1120px; margin:auto; padding:70px 22px 100px; }
     .trip-layout { display:grid; gap:78px; }
     .trip-hero { text-align:center; color:white; padding:48px 16px 14px; }
@@ -157,9 +149,6 @@
       .timeline-marker { width:46px; height:46px; border-width:4px; }
       .timeline-card { padding:20px; }
       .timeline-card ul { grid-template-columns:1fr; }
-      .lock-card { padding:34px 22px; }
-      .password-row { border-radius:22px; flex-direction:column; }
-      .password-row button { width:100%; }
       .documents-cta { padding:21px; }
       .documents-cta-icon { width:50px; height:50px; }
       .documents-cta > div:nth-child(2) { min-width:calc(100% - 70px); }
@@ -177,21 +166,11 @@
   </nav>
   <div id="bg-image"></div><div class="page-wash"></div>
   <main>
-    <section id="trip-lock" class="lock-screen">
-      <form class="lock-card" onsubmit="handleLogin(event)">
-        <span class="eyebrow">Private trip plan</span>
-        <h1 id="trip-title">España</h1>
-        <p>Enter the group password to open the itinerary.</p>
-        <div class="password-row"><input id="trip-password" type="password" placeholder="Trip password" autocomplete="current-password" required><button type="submit">Unlock <i class="fas fa-arrow-right"></i></button></div>
-        <p id="trip-error" class="hidden" role="alert" aria-live="polite" style="margin:16px 0 0;color:#ffd1c5;font-weight:700;">That password didn’t match. Try again.</p>
-      </form>
-    </section>
-    <section id="trip-content" class="trip-shell hidden"><div id="trip-root"></div></section>
+    <section id="trip-content" class="trip-shell"><div id="trip-root"></div></section>
   </main>
   <script src="render.js"></script>
   <script src="assets/spain-trip.js"></script>
   <script>
-    const TRIP_PASSWORD = "Valencia2026";
     const tripMeta = {
       spain: { title: "España", background: "https://images.unsplash.com/photo-1725208179317-c5e56702816a?auto=format&fit=crop&w=2000&q=88" },
       france: { title: "France", background: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=2000&q=88", copy: "A French chapter is taking shape. Routes, dates and favourite stops will appear here as plans settle." },
@@ -199,46 +178,20 @@
     };
     const requestedTrip = new URLSearchParams(window.location.search).get("trip") || "spain";
     const trip = Object.prototype.hasOwnProperty.call(tripMeta, requestedTrip) ? requestedTrip : "spain";
-    const protectedTrips = new Set(["spain"]);
     const activeMeta = tripMeta[trip];
+    const content = document.getElementById("trip-content");
     document.getElementById("bg-image").style.backgroundImage = `url('${activeMeta.background}')`;
-    document.getElementById("trip-title").textContent = activeMeta.title;
 
-    if (!protectedTrips.has(trip)) {
-      document.getElementById("trip-lock").classList.add("hidden");
-      const content = document.getElementById("trip-content");
-      content.classList.remove("hidden");
-      content.innerHTML = `<div class="planning-card"><div><span class="trip-kicker">Upcoming journey</span><h1>${activeMeta.title}</h1><p>${activeMeta.copy}</p><a class="trip-button" href="index.html#portfolio" style="margin-top:20px;">See all upcoming trips <i class="fas fa-arrow-right"></i></a></div></div>`;
-    }
-
-    function handleLogin(event) {
-      event.preventDefault();
-
-      const passwordInput = document.getElementById("trip-password");
-      const error = document.getElementById("trip-error");
-      const content = document.getElementById("trip-content");
-
-      error.classList.add("hidden");
-
-      if (passwordInput.value !== TRIP_PASSWORD) {
-        error.textContent = "That password didn’t match. Try again.";
-        error.classList.remove("hidden");
-        passwordInput.select();
-        return;
-      }
-
+    if (trip === "spain") {
       renderTrip(window.spainTrip);
 
       const welcome = document.createElement("div");
       welcome.className = "welcome-card scroll-reveal";
       welcome.innerHTML = `<h2>Welcome to Dillon and Jovita’s inner circle</h2><p>Let’s make this trip unforgettable ✈️</p>`;
       content.prepend(welcome);
-
-      document.getElementById("trip-lock").classList.add("hidden");
-      content.classList.remove("hidden");
-      passwordInput.value = "";
       setTimeout(() => welcome.classList.add("show"), 100);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      content.innerHTML = `<div class="planning-card"><div><span class="trip-kicker">Upcoming journey</span><h1>${activeMeta.title}</h1><p>${activeMeta.copy}</p><a class="trip-button" href="index.html#portfolio" style="margin-top:20px;">See all upcoming trips <i class="fas fa-arrow-right"></i></a></div></div>`;
     }
   </script>
   <script src="assets/site-enhancements.js"></script>
