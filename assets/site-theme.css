@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root {
+  --tt-ink:#17221f;
+  --tt-paper:#f8f3e9;
+  --tt-cream:#fffaf2;
+  --tt-coral:#ef5b35;
+  --tt-coral-dark:#d94724;
+  --tt-teal:#16858b;
+  --tt-line:rgba(23,34,31,.1);
+}
+
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif !important; color:var(--tt-ink); background:var(--tt-paper) !important; }
+h1,h2,h3,h4 { font-family:'DM Serif Display',serif !important; font-weight:400 !important; }
+
+body > nav,.tt-nav {
+  background:rgba(255,250,242,.91) !important;
+  border-bottom:1px solid var(--tt-line);
+  box-shadow:none !important;
+  backdrop-filter:blur(18px);
+}
+
+body > nav > div:first-child > div,.tt-nav > div:first-child > div { min-height:62px; }
+body > nav a { font-weight:650; }
+body > nav .nav-link,body > nav a[class*="text-gray"] { color:#42514c !important; transition:color .2s ease; }
+body > nav .nav-link:hover,body > nav a[class*="text-gray"]:hover { color:var(--tt-coral) !important; }
+.tt-brand { display:inline-flex !important; align-items:center; gap:11px; color:var(--tt-ink) !important; }
+.tt-brand-mark { width:38px; height:38px; flex:0 0 auto; display:inline-grid; place-items:center; border-radius:50%; color:white; background:var(--tt-coral); transform:rotate(-7deg); box-shadow:0 8px 20px rgba(239,91,53,.22); }
+
+.bg-indigo-600 { background-color:var(--tt-coral) !important; }
+.hover\:bg-indigo-700:hover,.hover\:bg-indigo-600:hover { background-color:var(--tt-coral-dark) !important; }
+.text-indigo-600,.text-indigo-700,.text-indigo-800 { color:var(--tt-coral) !important; }
+.border-indigo-600 { border-color:var(--tt-coral) !important; }
+.bg-indigo-50 { background-color:#fff0e7 !important; }
+.bg-indigo-100 { background-color:#ffe2d4 !important; }
+.text-indigo-100,.text-indigo-200,.text-indigo-300 { color:#ffd6be !important; }
+
+.blog-hero-frame { border-radius:30px !important; border:1px solid rgba(255,255,255,.35); box-shadow:0 30px 80px rgba(23,34,31,.2) !important; }
+.blog-hero-frame::after { background:linear-gradient(to top,rgba(8,24,21,.9) 0%,rgba(8,24,21,.48) 44%,rgba(8,24,21,.08) 100%) !important; }
+.blog-hero-content h1 { font-family:'DM Serif Display',serif !important; font-weight:400 !important; letter-spacing:-.02em; }
+.content-card,.sidebar-card { border:1px solid var(--tt-line); box-shadow:0 18px 50px rgba(23,34,31,.08) !important; }
+.content-card { border-radius:28px !important; background:var(--tt-cream) !important; }
+.sidebar-card { border-radius:24px !important; }
+.content-card .blog-section > h2 { font-size:clamp(2rem,4vw,2.65rem) !important; line-height:1.08; }
+.content-card p,.content-card li { line-height:1.78; }
+.content-card img { border-radius:20px; }
+.story-photo { margin:2rem 0; overflow:hidden; border-radius:22px; background:white; border:1px solid var(--tt-line); box-shadow:0 16px 38px rgba(23,34,31,.1); }
+.story-photo img { display:block; width:100%; height:clamp(260px,42vw,430px); object-fit:cover; border-radius:0; }
+.story-photo figcaption { display:flex; align-items:center; gap:9px; padding:13px 17px; color:#66706b; font-size:.82rem; }
+.story-photo figcaption i { color:var(--tt-coral); }
+
+.story-card { border:1px solid var(--tt-line); border-radius:24px; overflow:hidden; background:var(--tt-cream); box-shadow:0 16px 44px rgba(23,34,31,.08); transition:transform .25s ease,box-shadow .25s ease; }
+.story-card:hover { transform:translateY(-6px); box-shadow:0 24px 58px rgba(23,34,31,.14); }
+.story-card img { transition:transform .5s ease; }
+.story-card:hover img { transform:scale(1.045); }
+
+.coffee-float { position:fixed; left:20px; bottom:20px; z-index:70; display:flex; align-items:center; gap:10px; padding:12px 17px; border-radius:999px; color:white; background:#ff813f; text-decoration:none; font-weight:700; box-shadow:0 14px 35px rgba(78,38,18,.28); transition:transform .2s ease,box-shadow .2s ease; }
+.coffee-float:hover { transform:translateY(-3px); box-shadow:0 18px 42px rgba(78,38,18,.34); }
+.coffee-float i { font-size:1.05rem; }
+
+.tt-footer { background:#13211e !important; }
+
+@media (max-width:640px) {
+  .tt-brand { font-size:.88rem !important; }
+  .tt-brand-mark { width:34px; height:34px; }
+  .blog-hero-frame { border-radius:22px !important; }
+  .coffee-float { left:14px; bottom:14px; padding:11px 14px; font-size:.82rem; }
+}
