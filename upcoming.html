@@ -197,7 +197,7 @@
     };
     const requestedTrip = new URLSearchParams(window.location.search).get("trip") || "spain";
     const trip = Object.prototype.hasOwnProperty.call(tripMeta, requestedTrip) ? requestedTrip : "spain";
-    const protectedTrips = new Set(["spain", "portugal"]);
+    const protectedTrips = new Set(["spain"]);
     const activeMeta = tripMeta[trip];
     document.getElementById("bg-image").style.backgroundImage = `url('${activeMeta.background}')`;
     document.getElementById("trip-title").textContent = activeMeta.title;
@@ -240,8 +240,6 @@
         if (!response.ok || !payload.success || !payload.trip) {
           if (response.status === 401) {
             error.textContent = "That password didn’t match. Try again.";
-          } else if (response.status === 503) {
-            error.textContent = "Trip access isn’t configured yet. Please contact Dillon or Jovita.";
           } else {
             error.textContent = "We couldn’t unlock the trip right now. Please try again.";
           }
